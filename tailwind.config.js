@@ -5,7 +5,18 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    container:{
+      center: true,
+    },
+
+    extend: {
+      colors:{
+        blue:"#068fff",
+        orginal:'#e6f0fa',
+        hover:'#5db5fc',
+        body:'#f4f5f9'
+      }
+    },
   },
   plugins: [],
 }

@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family:"Vazir";
+  src: url("../public/fonts/Vazir.woff") format("woff");
+}
+@layer utilities {
+    body{
+        direction: rtl;
+        background-color: c;
+        font-family:"Vazir";
+    }
+  .flex-row-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .flex-col-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .vazir {
+    font-family: "Vazir";
+  }
+  .vazir-bold {
+    font-family: "Vazir";
+    font-weight: bold;
+  }
+  .sky {
+    background: linear-gradient(
+      to right,
+      RGBA(6, 182, 212),
+      RGBA(34, 211, 238)
+    );
+  }
+  .Purple {
+    background: linear-gradient(
+      to right,
+      RGBA(139, 92, 246),
+      RGBA(167, 139, 250)
+    );
+  }
+  .blue {
+    background: linear-gradient(
+      to right,
+      RGBA(59, 130, 246),
+      RGBA(96, 165, 250)
+    );
+  }
+}
