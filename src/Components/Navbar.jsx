@@ -33,9 +33,9 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-white  ">
+      <nav className="bg-white z-10">
         {/* ================================================ start navbar */}
-        <div className=" w-full flex flex-row justify-between py-2 px-2 md:px-5 fixed top-0  lg:relative shadow-lg lg:shadow-none pb-2 lg:pb-0">
+        <div className="z-10 w-full flex flex-row justify-between  bg-white py-2 px-2 md:px-5 fixed top-0  lg:relative shadow-lg lg:shadow-none pb-2 lg:pb-0">
           {/* ================================================ topbar-right */}
           <div className="topbar-right flex-row-center py-2">
             <IoMenu
@@ -49,7 +49,7 @@ export default function Navbar() {
               className="w-[100px] h-[40px]  md:w-[140px] md:h-[55px] lg:hidden"
             />
             {/* </Link> */}
-            <div className="relative px-3 mr-5 lg:mr-0 hidden lg:flex">
+            <div className="relative  mr-5 lg:mr-0 hidden lg:flex">
               <button className="flex absolute inset-y-0 left-2 items-center pl-3 ">
                 <svg
                   className="w-8 h-8  text-blue "
@@ -86,12 +86,12 @@ export default function Navbar() {
         </div>
         {/* ================================================ hamburger Menu */}
         <div
-          className={`w-[100%] h-[100%] absolute bg-black opacity-[50%] pt-0 z-10 ${
+          className={`w-[100%] h-[100vh] absolute bg-black opacity-[50%] pt-0 z-10 ${
             statusMenu ? "flex" : "hidden"
           }`}
         ></div>
         <div
-        ref={Menu}
+          ref={Menu}
           className={`w-[320px] h-[100vh] bg-white fixed top-0 right-0 z-20 p-3 ${
             statusMenu ? "visible" : "hidden"
           }`}
@@ -154,8 +154,8 @@ export default function Navbar() {
         </div>
       </nav>
       {/* ============================================================ navbar-bottom */}
-      <div className=" px-5 navbar-bottom bg-white shadow-lg text-gray-700 py-2 hidden lg:flex-row-center sticky top-0 ">
-        <div className="flex-row-center ">
+      <div className=" z-10  px-5 navbar-bottom bg-white shadow-lg text-gray-700 py-2 hidden lg:flex-row-center sticky top-0 ">
+        <div className="flex-row-center   ">
           <div className="flex-row-center ml-10 py-2 border-b-2 border-white hover:border-b-blue">
             <IoHome className="w-[25px] h-[25px] text-blue" />
             <span className="mr-1.5 text-[17px] ">صفحه اصلی </span>
