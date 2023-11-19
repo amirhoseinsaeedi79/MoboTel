@@ -7,7 +7,7 @@ import { Autoplay, Pagination, Navigation, EffectFade } from "swiper/modules";
 
 export default function Slider() {
   return (
-    <div className="all-Slider px-2 md:px-6 pt-24 md:pt-28 lg:pt-0 lg:mt-7 ">
+    <div className="all-Slider px-2 md:px-6 pt-24 md:pt-28 lg:pt-0 lg:mt-7 mb-7">
       {/* ================================================================ header slider */}
       <div className=" w-full  ">
         <Swiper

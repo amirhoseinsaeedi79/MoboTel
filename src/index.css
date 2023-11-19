@@ -51,5 +51,22 @@
       RGBA(59, 130, 246),
       RGBA(96, 165, 250)
     );
+
+  }
+  .paralexHome{
+    width: 100%;
+    height: 400px;
+    background-image: url(../public/images/paralex-home.png);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .paralexHome2{
+    width: 100%;
+    height: 400px;
+    background-image: url(../public/images/paralex-home.webp);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 }

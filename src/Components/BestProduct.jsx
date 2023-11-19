@@ -1,4 +1,3 @@
-
 import { FaRegHeart } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { CiShoppingBasket } from "react-icons/ci";
@@ -12,8 +11,12 @@ import { Autoplay, Pagination, Navigation, EffectFade } from "swiper/modules";
 import Title from "./Title";
 import offer from "../Data/Data";
 
-export default function Offer() {
-  const title = { textWhite: "پیشنهاد ویژه", textBlue: "فروشگاه",more:"مشاهده بیشتر" };
+export default function BestProduct() {
+  const title = {
+    textWhite: "محصولات",
+    textBlue: "پرفروش",
+    more: "مشاهده بیشتر",
+  };
   return (
     <>
       <Title title={title} />
@@ -94,7 +97,7 @@ export default function Offer() {
           </Swiper>
         </div>
       </div>
-      <div className="paralexHome2 my-7 md:my-7"></div>
+      <div className="paralexHome mt-5 md:mt-9"></div>
     </>
   );
 }
