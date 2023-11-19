@@ -42,7 +42,7 @@ export default function Slider() {
             />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="images/4.png" alt="" className="  h-[130px]  md:h-[350px] lg:h-[430px] rounded-2xl" />
+            <img src="images/41.jpeg" alt="" className="  h-[130px]  md:h-[350px] lg:h-[430px] rounded-2xl" />
           </SwiperSlide>
         </Swiper>
       </div>

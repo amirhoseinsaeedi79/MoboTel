@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation, EffectFade } from "swiper/modules";
 import Title from "./Title";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import ctg from "../Data/Ctg";
 
 export default function Catgory() {

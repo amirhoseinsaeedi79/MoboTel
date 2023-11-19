@@ -56,7 +56,7 @@
   .paralexHome{
     width: 100%;
     height: 400px;
-    background-image: url(../public/images/paralex-home.png);
+    background-image: url(../public/images/paralex.webp);
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -64,7 +64,7 @@
   .paralexHome2{
     width: 100%;
     height: 400px;
-    background-image: url(../public/images/paralex-home.webp);
+    background-image: url(../public/images/paralex-home.jpg);
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
