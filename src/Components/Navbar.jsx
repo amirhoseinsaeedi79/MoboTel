@@ -7,7 +7,6 @@ import { MdOutlineLocalOffer } from "react-icons/md";
 import { BsQuestionCircleFill } from "react-icons/bs";
 import { IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import { FaRegUserCircle } from "react-icons/fa";
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
@@ -22,9 +21,6 @@ export default function Navbar() {
       if (!Menu.current.contains(e.target)) {
         setStatusMenu(false);
       }
-      // if (!sale.current.contains(e.target)) {
-      //   setStatusSale(false);
-      // }
     };
 
     document.addEventListener("mousedown", handler);
@@ -42,13 +38,13 @@ export default function Navbar() {
               onClick={() => setStatusMenu(!statusMenu)}
               className="w-9 h-9 ml-3 lg:hidden "
             />
-            {/* <Link to='/'> */}
+            <Link to='/'>
             <img
               src="images/logo.jpg"
               alt="logo"
               className="w-[100px] h-[40px]  md:w-[140px] md:h-[55px] lg:hidden"
             />
-            {/* </Link> */}
+            </Link>
             <div className="relative  mr-5 lg:mr-0 hidden lg:flex">
               <button className="flex absolute inset-y-0 left-2 items-center pl-3 ">
                 <svg
@@ -73,7 +69,7 @@ export default function Navbar() {
           <div className="topbar-left flex-row-center vazir-bold text-gray-700">
             <div className="flex-row-center p-2 md:p-3.5 ml-3 cursor-pointer bg-white hover:border hover:border-blue rounded-3xl shadow-md border-[1px] border-gray-200">
               <FaCircleUser className="w-[20px] h-[20px] md:w-[28px] md:h-[28px] text-blue" />
-              <span className="mr-3 hidden  lg:flex">ورود / ثبت نام</span>
+              <Link to='/Login' className="mr-3 hidden  lg:flex">ورود / ثبت نام</Link>
             </div>
             <div className="flex-row-center p-2 md:p-3 cursor-pointer bg-gray-300 lg:bg-white hover:border hover:border-blue rounded-3xl shadow-md border-[1px] border-gray-200">
               <FaBasketShopping className="w-[22px] h-[22px] ml-2 md:w-[30px] md:h-[30px] text-blue" />
@@ -97,22 +93,22 @@ export default function Navbar() {
           }`}
         >
           <div className="flex flex-row justify-between items-center vazir-bold ">
-            <h3 className="text-[20px]">
+            <Link to='/' className="text-[20px]">
               فروشگاه <span className="text-blue">موبوتل</span>
-            </h3>
+            </Link>
             <IoMdClose
               onClick={() => setStatusMenu(!statusMenu)}
               className="w-[35px] h-[35px] cursor-pointer"
             />
           </div>
           <div className="flex-col-center pt-5">
-            {/* <> */}
+            <Link to='/'>
             <img
               src="images/logo.jpg"
               alt="logo"
               className="w-[135px] h-[60px]"
             />
-            {/* </Link> */}
+            </Link>
             <div className="relative mt-3 ">
               <button className="flex absolute inset-y-0 left-2 items-center pl-1 ">
                 <svg
@@ -135,21 +131,21 @@ export default function Navbar() {
           </div>
           {/* ================================================================ hamburger Menu body  */}
           <div className="flex flex-col justify-start items-start mt-7">
-            <div className="w-full flex-row-center py-2 bg-body mb-3  hover:bg-blue hover:text-white hover:border-b-blue">
+            <Link to='/' className="w-full flex-row-center py-2 bg-body mb-3  hover:bg-blue hover:text-white hover:border-b-blue">
               <span className="mr-1.5 text-[17px] ">صفحه اصلی </span>
-            </div>
-            <div className="w-full flex-row-center py-2 mb-3 bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
+            </Link>
+            <Link to='/Products' className="w-full flex-row-center py-2 mb-3 bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
               <span className="mr-1.5 text-[17px] ">دسته بندی محصولات</span>
-            </div>
-            <div className="w-full flex-row-center py-2 mb-3  bg-body hover:bg-blue hover:text-white  hover:border-b-blue">
+            </Link>
+            <Link to='/Offers' className="w-full flex-row-center py-2 mb-3  bg-body hover:bg-blue hover:text-white  hover:border-b-blue">
               <span className="mr-1.5 text-[17px] ">تخفیف و پیشنهاد ها</span>
-            </div>
-            <div className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
+            </Link>
+            <Link to='/Questions' className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
               <span className="mr-1.5 text-[17px] ">سوالات متداول</span>
-            </div>
-            <div className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
+            </Link>
+            <Link to='/Login' className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
               <span className="mr-1.5 text-[17px] ">ثبت نام یا ورود</span>
-            </div>
+            </Link>
           </div>
         </div>
       </nav>
@@ -158,27 +154,27 @@ export default function Navbar() {
         <div className="flex-row-center   ">
           <div className="flex-row-center ml-10 py-2 border-b-2 border-white hover:border-b-blue">
             <IoHome className="w-[25px] h-[25px] text-blue" />
-            <span className="mr-1.5 text-[17px] ">صفحه اصلی </span>
+            <Link to='/' className="mr-1.5 text-[17px] ">صفحه اصلی </Link>
           </div>
           <div className="flex-row-center ml-10 py-2 border-b-2 border-white hover:border-b-blue">
             <TbCategory className="w-[25px] h-[25px] text-blue" />
-            <span className="mr-1.5 text-[17px] ">دسته بندی محصولات</span>
+            <Link to='/Products' className="mr-1.5 text-[17px] ">دسته بندی محصولات</Link>
           </div>
-          {/* <Link to='/'> */}
+          <Link to='/'>
           <img
             src="images/logo.jpg"
             alt="logo"
             className="w-[140px] h-[55px] mr-7 ml-7"
           />
-          {/* </Link> */}
-          <div className="flex-row-center mr-14 py-2 border-b-2 border-white hover:border-b-blue">
+          </Link>
+          <Link to='/Offers' className="flex-row-center mr-14 py-2 border-b-2 border-white hover:border-b-blue">
             <MdOutlineLocalOffer className="w-[25px] h-[25px] text-blue" />
-            <span className="mr-1.5 text-[17px] ">تخفیف و پیشنهاد ها</span>
-          </div>
-          <div className="flex-row-center mr-12 py-2 border-b-2 border-white hover:border-b-blue">
+            <Link to='/Offers' className="mr-1.5 text-[17px]">تخفیف و پیشنهاد ها</Link>
+          </Link>
+          <Link to='/Questions' className="flex-row-center mr-12 py-2 border-b-2 border-white hover:border-b-blue">
             <BsQuestionCircleFill className="w-[25px] h-[25px] text-blue" />
-            <span className="mr-1.5 text-[17px] ">سوالات متداول</span>
-          </div>
+            <Link to='/Questions' className="mr-1.5 text-[17px]">سوالات متداول</Link>
+          </Link>
         </div>
       </div>
     </>
