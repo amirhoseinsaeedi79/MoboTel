@@ -61,7 +61,7 @@ export default function Navbar() {
                 type="text"
                 id="default-search"
                 className="w-[400px] h-[50px] px-8 py-1.5 pl-10 shadow-md  text-gray-900 bg-gray-100 rounded-3xl border border-gray-200 focus:outline-none"
-                placeholder="جستجوی محصولات ... "
+                placeholder="جستجوی بیشتر ... "
               />
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function Navbar() {
                 type="text"
                 id="default-search"
                 className="w-[300px] h-[40px] px-8 py-1.5  shadow-md  text-gray-900 bg-gray-100 rounded-3xl border border-gray-200 focus:outline-none"
-                placeholder="جستجوی محصولات ... "
+                placeholder="جستجوی بیشتر ... "
               />
             </div>
           </div>

@@ -16,11 +16,8 @@ export default function App() {
   },[])
 
   const newProduct = (ctg)=>{
-    fetch(`http://localhost:3000/product?ctg=${ctg}`)
-     .then((res) => setAllProduct(res.data));
+    setAllProduct(ctg)
  }
-
-
 
   let router = useRoutes(Router);
 

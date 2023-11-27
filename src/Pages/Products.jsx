@@ -15,11 +15,13 @@ import { Autoplay, Pagination } from "swiper/modules";
 import Title from "../Components/Title";
 import { useContext, useEffect, useState } from "react";
 import { GetProduct } from "../Services/Axios/Requests/Products";
+import Loader from "../Components/Loader";
 
 export default function Products() {
   const context = useContext(Context);
   // ============================================================ states
   const [allProducts, setAllProducts] = useState([]);
+  const [search, setSearch] = useState("");
 
   // ============================================================ functions
   useEffect(() => {
@@ -29,7 +31,33 @@ export default function Products() {
   async function sortHandler(ctg) {
     await axios
       .get(`http://localhost:3000/product?ctg=${ctg}`)
-      .then((res) => setAllProducts(res.data));
+      .then((res) => context.newProduct(res.data));
+    console.log(context.allProduct);
+  }
+  const allSelectProducts = () => {
+    GetProduct().then((res) => context.newProduct(res.data));
+  };
+
+  const inexpensive = () => {
+   const filterPrice =  allProducts.filter((items) => {
+      return items.statusPrice !== "expensive";
+    });
+    context.newProduct(filterPrice)
+  };
+
+  const expensive = () => {
+    const filterPrice =  allProducts.filter((items) => {
+      return items.statusPrice == "expensive";
+    });
+    context.newProduct(filterPrice)
+  };
+
+  async function searchHandler(event) {
+    setSearch(event.target.value);
+    const searchValue = allProducts.filter((item) =>
+      item.name.includes(search)
+    );
+    await context.newProduct(searchValue);
   }
 
   const title = {
@@ -39,7 +67,7 @@ export default function Products() {
   };
 
   return (
-    <div className="w-full pt-[90px] md:pt-24 lg:pt-3 pb-5">
+    <div className="w-full pt-[90px] md:pt-24 lg:pt-6 pb-5">
       <div className="flex flex-row items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl  md:mb-7 text-[12px] md:text-[17px] vazir-bold">
         <Link to="/">خانه</Link>
         <MdOutlineChevronLeft className="w-[15px] h-[15px] mx-2" />
@@ -105,46 +133,49 @@ export default function Products() {
       <Title title={title} />
       <div className="w-full flex flex-col-reverse md:flex-row-reverse justify-between  px-2.5 md:px-6 pt-3   ">
         <div className="w-full md:w-[85%] xl:w-[90%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3 xl:gap-x-7">
-          {allProducts.map((item) => (
-            <SwiperSlide
-              key={item.id}
-              className="w-[100%] h-[360px] rounded-xl text-center bg-white flex flex-col p-4 mb-5 md:mb-7 shadow-lg"
-            >
-              {/* <div className=" md:w-[320px] rounded-xl text-center bg-white flex flex-col p-4 shadow-lg"> */}
-              <div className="flex flex-row justify-between items-center">
-                <div className="text-[17px] px-2 py-[3px] pt-1 rounded-lg text-red-600 bg-red-200 ">
-                  <span>30٪ تخفیف</span>
+          {context.allProduct.length !== 0 ? (
+            context.allProduct.map((item) => (
+              <SwiperSlide
+                key={item.id}
+                className="w-[100%] h-[330px] rounded-xl text-center bg-white flex flex-col p-4 mb-5 md:mb-7 shadow-lg"
+              >
+                <div className="flex flex-row justify-between items-center">
+                  <div className="text-[17px] px-2 py-[3px] pt-1 rounded-lg text-red-600 bg-red-200 ">
+                    <span>30٪ تخفیف</span>
+                  </div>
+                  <div className="flex-row-center">
+                    <FaRegHeart className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer hover:text-red-500" />
+                    <IoEyeOutline className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl bg-gray-200 cursor-pointer hover:text-blue" />
+                  </div>
                 </div>
-                <div className="flex-row-center">
-                  <FaRegHeart className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer hover:text-red-500" />
-                  <IoEyeOutline className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl bg-gray-200 cursor-pointer hover:text-blue" />
+                <div className="flex-row-center mt-3">
+                  <img
+                    src={`images/${item.imgae}`}
+                    alt=""
+                    className="w-[180px] h-[180px] md:w-[150px]  md:h-[150px] items-center"
+                  />
                 </div>
-              </div>
-              <div className="flex-row-center mt-3">
-                <img
-                  src={`images/${item.imgae}`}
-                  alt=""
-                  className="w-[180px] h-[180px] md:w-[150px]  md:h-[150px] items-center"
-                />
-              </div>
-              <div className="flex-row-center mt-4 text-[16px]">
-                <span>{item.name}</span>
-              </div>
-              <div className="flex flex-row-reverse items-center justify-between mt-3 ">
-                <div className="py-2">
-                  <button className="flex-row-center bg-blue rounded-xl p-2 mx-h-[50px] hover:text-white">
-                    <CiShoppingBasket className="w-[25px] h-[25px]" />
-                    <span>خرید محصول</span>
-                  </button>
+                <div className="flex-row-center mt-4 text-[16px]">
+                  <span>{item.name}</span>
                 </div>
-                <div className="flex-col-center text-[17px]">
-                  <span>20000</span>
-                  <del className="text-red-500">652000</del>
+                <div className="flex flex-row-reverse items-center justify-between mt-3 ">
+                  <div className="py-2">
+                    <button className="flex-row-center bg-blue rounded-xl p-2 mx-h-[50px] hover:text-white">
+                      <CiShoppingBasket className="w-[25px] h-[25px]" />
+                      <span>خرید محصول</span>
+                    </button>
+                  </div>
+                  <div className="flex-col-center text-[17px]">
+                    <span>{`${item.price}`}</span>
+                    <del className="text-red-500">{item.price} تومان</del>
+                  </div>
                 </div>
-              </div>
-              {/* </div> */}
-            </SwiperSlide>
-          ))}
+                {/* </div> */}
+              </SwiperSlide>
+            ))
+          ) : (
+            <Loader />
+          )}
         </div>
 
         {/* ================================================================ sort products */}
@@ -163,6 +194,8 @@ export default function Products() {
                 </svg>
               </button>
               <input
+                onChange={searchHandler}
+                value={search}
                 type="text"
                 id="default-search"
                 className=" direction px-5 py-2 md:py-3 pl-10 w-full rounded-xl border-[1px] bg-gray-200 border-gray-300 focus:outline-none"
@@ -175,15 +208,19 @@ export default function Products() {
             <div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">تمام محصولات</span>
-                <input type="radio" name="test" />
+                <input
+                  onClick={() => allSelectProducts()}
+                  type="radio"
+                  name="test"
+                />
               </div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">ارزانترین</span>
-                <input type="radio" name="test" />
+                <input onClick={() => inexpensive()} type="radio" name="test" />
               </div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">گرانترین</span>
-                <input type="radio" name="test" />
+                <input onClick={() => expensive()} type="radio" name="test" />
               </div>
             </div>
           </div>
@@ -192,35 +229,67 @@ export default function Products() {
             <div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">ایرپاد</span>
-                <input type="radio" name="ctg" />
+                <input
+                  onClick={() => sortHandler("airpod")}
+                  type="radio"
+                  name="ctg"
+                />
               </div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">شارژر</span>
-                <input type="radio" name="ctg" />
+                <input
+                  onClick={() => sortHandler("charger")}
+                  type="radio"
+                  name="ctg"
+                />
               </div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">پاوربانک</span>
-                <input type="radio" name="ctg" />
+                <input
+                  onClick={() => sortHandler("power")}
+                  type="radio"
+                  name="ctg"
+                />
               </div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">قاب موبایل</span>
-                <input type="radio" name="ctg" />
+                <input
+                  onClick={() => sortHandler("cover")}
+                  type="radio"
+                  name="ctg"
+                />
               </div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">هدفون</span>
-                <input type="radio" name="ctg" />
+                <input
+                  onClick={() => sortHandler("headphon")}
+                  type="radio"
+                  name="ctg"
+                />
               </div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">فلش</span>
-                <input type="radio" name="ctg" />
+                <input
+                  onClick={() => sortHandler("flash")}
+                  type="radio"
+                  name="ctg"
+                />
               </div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">مموری</span>
-                <input type="radio" name="ctg" />
+                <input
+                  onClick={() => sortHandler("memori")}
+                  type="radio"
+                  name="ctg"
+                />
               </div>
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">ساعت</span>
-                <input type="radio" name="ctg" />
+                <input
+                  onClick={() => sortHandler("watch")}
+                  type="radio"
+                  name="ctg"
+                />
               </div>
             </div>
           </div>

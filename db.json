@@ -172,7 +172,8 @@
       "ctg": "charger",
       "price": "2,300,000",
       "quantity": "500",
-      "imgae": "charger (4).jpg"
+      "imgae": "charger (4).jpg",
+      "statusPrice":"expensive"
     },
     {
       "id": 20,
@@ -436,7 +437,8 @@
       "ctg": "power",
       "price": "2,550,000",
       "quantity": "500",
-      "imgae": "power (4).webp"
+      "imgae": "power (4).webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 83,
@@ -444,7 +446,8 @@
       "ctg": "power",
       "price": "2,550,000",
       "quantity": "500",
-      "imgae": "power (5).webp"
+      "imgae": "power (5).webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 84,
@@ -476,7 +479,8 @@
       "ctg": "power",
       "price": "2,550,000",
       "quantity": "500",
-      "imgae": "power (9).webp"
+      "imgae": "power (9).webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 88,
@@ -484,7 +488,8 @@
       "ctg": "power",
       "price": "2,550,000",
       "quantity": "500",
-      "imgae": "power (10).webp"
+      "imgae": "power (10).webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 89,
@@ -500,7 +505,8 @@
       "ctg": "power",
       "price": "3,000,000",
       "quantity": "500",
-      "imgae": "power (12).webp"
+      "imgae": "power (12).webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 91,
@@ -508,7 +514,8 @@
       "ctg": "watch",
       "price": "3,000,000",
       "quantity": "500",
-      "imgae": "watch (1).webp"
+      "imgae": "watch (1).webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 92,
@@ -516,7 +523,8 @@
       "ctg": "watch",
       "price": "3,600,000",
       "quantity": "500",
-      "imgae": "watch (2).webp"
+      "imgae": "watch (2).webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 93,
@@ -548,7 +556,8 @@
       "ctg": "watch",
       "price": "6,000,000",
       "quantity": "500",
-      "imgae": "watch (6).webp"
+      "imgae": "watch (6).webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 97,
@@ -564,7 +573,8 @@
       "ctg": "watch",
       "price": "3,500,000",
       "quantity": "500",
-      "imgae": "watch (1).jpg"
+      "imgae": "watch (1).jpg",
+      "statusPrice":"expensive"
     },
     {
       "id": 99,
@@ -588,7 +598,8 @@
       "ctg": "watch",
       "price": "3,500,000",
       "quantity": "500",
-      "imgae": "watch (4).jpg"
+      "imgae": "watch (4).jpg",
+      "statusPrice":"expensive"
     },
     {
       "id": 102,
@@ -684,7 +695,8 @@
       "ctg": "headphon",
       "price": "3,500,000",
       "quantity": "500",
-      "imgae": "headphon (4).jpg"
+      "imgae": "headphon (4).jpg",
+      "statusPrice":"expensive"
     },
     {
       "id": 114,
@@ -780,7 +792,8 @@
       "ctg": "flash",
       "price": "4,000,000",
       "quantity": "500",
-      "imgae": "flash10.webp"
+      "imgae": "flash10.webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 126,
@@ -796,7 +809,8 @@
       "ctg": "flash",
       "price": "3,000,000",
       "quantity": "500",
-      "imgae": "flash12.webp"
+      "imgae": "flash12.webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 128,
@@ -836,7 +850,8 @@
       "ctg": "memori",
       "price": "6,550,000",
       "quantity": "500",
-      "imgae": "memori5.webp"
+      "imgae": "memori5.webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 133,
@@ -852,7 +867,8 @@
       "ctg": "memori",
       "price": "6,300,000",
       "quantity": "500",
-      "imgae": "memori7.webp"
+      "imgae": "memori7.webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 135,
@@ -860,7 +876,8 @@
       "ctg": "memori",
       "price": "6,850,000",
       "quantity": "500",
-      "imgae": "memori8.webp"
+      "imgae": "memori8.webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 136,
@@ -868,7 +885,8 @@
       "ctg": "memori",
       "price": "6,500,000",
       "quantity": "500",
-      "imgae": "memori9.webp"
+      "imgae": "memori9.webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 137,
@@ -876,7 +894,8 @@
       "ctg": "memori",
       "price": "4,000,000",
       "quantity": "500",
-      "imgae": "memori10.webp"
+      "imgae": "memori10.webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 138,
@@ -884,7 +903,8 @@
       "ctg": "memori",
       "price": "8,500,000",
       "quantity": "500",
-      "imgae": "memori11.webp"
+      "imgae": "memori11.webp",
+      "statusPrice":"expensive"
     },
     {
       "id": 139,
