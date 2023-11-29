@@ -4,8 +4,10 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation, EffectFade } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 
 export default function Slider() {
+  const navigate = useNavigate();
   return (
     <div className="all-Slider px-2 md:px-6 pt-24 md:pt-28 lg:pt-0 lg:mt-7 mb-7">
       {/* ================================================================ header slider */}
@@ -26,23 +28,35 @@ export default function Slider() {
         >
           <SwiperSlide>
             <img
+              onClick={() => navigate("/Products")}
               src="images/1.webp"
               alt=""
               className=" h-[130px]  md:h-[350px] lg:h-[430px] rounded-2xl"
             />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="images/2.jpg" alt="" className="  h-[130px]  md:h-[350px] lg:h-[430px] rounded-2xl" />
+            <img
+              onClick={() => navigate("/Products")}
+              src="images/2.jpg"
+              alt=""
+              className="  h-[130px]  md:h-[350px] lg:h-[430px] rounded-2xl"
+            />
           </SwiperSlide>
           <SwiperSlide>
             <img
+              onClick={() => navigate("/Products")}
               src="images/whatch.png"
               alt=""
               className="  h-[130px]  md:h-[350px] lg:h-[430px] rounded-2xl"
             />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="images/41.jpeg" alt="" className="  h-[130px]  md:h-[350px] lg:h-[430px] rounded-2xl" />
+            <img
+              onClick={() => navigate("/Products")}
+              src="images/41.jpeg"
+              alt=""
+              className="  h-[130px]  md:h-[350px] lg:h-[430px] rounded-2xl"
+            />
           </SwiperSlide>
         </Swiper>
       </div>

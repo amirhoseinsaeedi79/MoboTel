@@ -7,11 +7,14 @@ import { MdOutlineLocalOffer } from "react-icons/md";
 import { BsQuestionCircleFill } from "react-icons/bs";
 import { IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
+import Context from "../Context/context";
+import ModalMenu from "./ModalMenu";
 
 export default function Navbar() {
+  const context = useContext(Context);
   const [statusMenu, setStatusMenu] = useState(false);
 
   const Menu = useRef();
@@ -20,12 +23,22 @@ export default function Navbar() {
     let handler = (e) => {
       if (!Menu.current.contains(e.target)) {
         setStatusMenu(false);
+        context.showModalMenu(false)
       }
     };
 
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   });
+
+  const exitMenu = () =>{
+    setStatusMenu(!statusMenu)
+    context.showModalMenu(false)
+  }
+  const openMenu = () =>{
+    setStatusMenu(!statusMenu)
+    context.showModalMenu(true)
+  }
 
   return (
     <>
@@ -35,7 +48,7 @@ export default function Navbar() {
           {/* ================================================ topbar-right */}
           <div className="topbar-right flex-row-center py-2">
             <IoMenu
-              onClick={() => setStatusMenu(!statusMenu)}
+              onClick={openMenu}
               className="w-9 h-9 ml-3 lg:hidden "
             />
             <Link to='/'>
@@ -81,14 +94,10 @@ export default function Navbar() {
           </div>
         </div>
         {/* ================================================ hamburger Menu */}
-        <div
-          className={`w-[100%] h-[100vh] absolute bg-black opacity-[50%] pt-0 z-10 ${
-            statusMenu ? "flex" : "hidden"
-          }`}
-        ></div>
+
         <div
           ref={Menu}
-          className={`w-[320px] h-[100vh] bg-white fixed top-0 right-0 z-20 p-3 ${
+          className={`w-[320px] h-[100vh] bg-white fixed top-0 right-0 z-[99999] p-3 ${
             statusMenu ? "visible" : "hidden"
           }`}
         >
@@ -97,7 +106,8 @@ export default function Navbar() {
               فروشگاه <span className="text-blue">موبوتل</span>
             </Link>
             <IoMdClose
-              onClick={() => setStatusMenu(!statusMenu)}
+            
+              onClick={exitMenu}
               className="w-[35px] h-[35px] cursor-pointer"
             />
           </div>
@@ -131,19 +141,19 @@ export default function Navbar() {
           </div>
           {/* ================================================================ hamburger Menu body  */}
           <div className="flex flex-col justify-start items-start mt-7">
-            <Link to='/' className="w-full flex-row-center py-2 bg-body mb-3  hover:bg-blue hover:text-white hover:border-b-blue">
+            <Link  onClick={exitMenu} to='/' className="w-full flex-row-center py-2 bg-body mb-3  hover:bg-blue hover:text-white hover:border-b-blue">
               <span className="mr-1.5 text-[17px] ">صفحه اصلی </span>
             </Link>
-            <Link to='/Products' className="w-full flex-row-center py-2 mb-3 bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
+            <Link  onClick={exitMenu} to='/Products' className="w-full flex-row-center py-2 mb-3 bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
               <span className="mr-1.5 text-[17px] ">دسته بندی محصولات</span>
             </Link>
-            <Link to='/Offers' className="w-full flex-row-center py-2 mb-3  bg-body hover:bg-blue hover:text-white  hover:border-b-blue">
+            <Link  onClick={exitMenu} to='/Offers' className="w-full flex-row-center py-2 mb-3  bg-body hover:bg-blue hover:text-white  hover:border-b-blue">
               <span className="mr-1.5 text-[17px] ">تخفیف و پیشنهاد ها</span>
             </Link>
-            <Link to='/Questions' className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
+            <Link  onClick={exitMenu} to='/Questions' className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
               <span className="mr-1.5 text-[17px] ">سوالات متداول</span>
             </Link>
-            <Link to='/Login' className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
+            <Link  onClick={exitMenu} to='/Login' className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue">
               <span className="mr-1.5 text-[17px] ">ثبت نام یا ورود</span>
             </Link>
           </div>
@@ -152,14 +162,14 @@ export default function Navbar() {
       {/* ============================================================ navbar-bottom */}
       <div className=" z-10  px-5 navbar-bottom bg-white shadow-lg text-gray-700 py-2 hidden lg:flex-row-center sticky top-0 ">
         <div className="flex-row-center   ">
-          <div className="flex-row-center ml-10 py-2 border-b-2 border-white hover:border-b-blue">
+          <Link to='/' className="flex-row-center ml-10 py-2 border-b-2 border-white hover:border-b-blue">
             <IoHome className="w-[25px] h-[25px] text-blue" />
-            <Link to='/' className="mr-1.5 text-[17px] ">صفحه اصلی </Link>
-          </div>
-          <div className="flex-row-center ml-10 py-2 border-b-2 border-white hover:border-b-blue">
+            <div className="mr-1.5 text-[17px] ">صفحه اصلی </div>
+          </Link>
+          <Link to='/Products' className="flex-row-center ml-10 py-2 border-b-2 border-white hover:border-b-blue">
             <TbCategory className="w-[25px] h-[25px] text-blue" />
-            <Link to='/Products' className="mr-1.5 text-[17px] ">دسته بندی محصولات</Link>
-          </div>
+            <div className="mr-1.5 text-[17px] ">دسته بندی محصولات</div>
+          </Link>
           <Link to='/'>
           <img
             src="images/logo.jpg"
@@ -169,14 +179,15 @@ export default function Navbar() {
           </Link>
           <Link to='/Offers' className="flex-row-center mr-14 py-2 border-b-2 border-white hover:border-b-blue">
             <MdOutlineLocalOffer className="w-[25px] h-[25px] text-blue" />
-            <Link to='/Offers' className="mr-1.5 text-[17px]">تخفیف و پیشنهاد ها</Link>
+            <div className="mr-1.5 text-[17px]">تخفیف و پیشنهاد ها</div>
           </Link>
           <Link to='/Questions' className="flex-row-center mr-12 py-2 border-b-2 border-white hover:border-b-blue">
             <BsQuestionCircleFill className="w-[25px] h-[25px] text-blue" />
-            <Link to='/Questions' className="mr-1.5 text-[17px]">سوالات متداول</Link>
+            <div className="mr-1.5 text-[17px]">سوالات متداول</div>
           </Link>
         </div>
       </div>
+      {context.statusMenu && <ModalMenu/>}
     </>
   );
 }

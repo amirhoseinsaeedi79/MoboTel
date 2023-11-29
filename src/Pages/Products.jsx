@@ -1,8 +1,7 @@
 import { MdOutlineChevronLeft } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
-import { IoEyeOutline } from "react-icons/io5";
 import { CiShoppingBasket } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Context from "../Context/context";
 import axios from "axios";
 import ctg from "../Data/Ctg";
@@ -10,7 +9,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import { Autoplay, Pagination } from "swiper/modules";
 import Title from "../Components/Title";
 import { useContext, useEffect, useState } from "react";
@@ -26,7 +24,15 @@ export default function Products() {
   // ============================================================ functions
   useEffect(() => {
     GetProduct().then((res) => setAllProducts(res.data));
-  }, []);
+  }, [search]);
+
+  const navigate = useNavigate();
+
+  const InfoHandler = async (item) => {
+    const localInfo = localStorage.setItem("info", JSON.stringify(item));
+    context.showInfoProduct(localInfo);
+    navigate("/ShowProduct");
+  };
 
   async function sortHandler(ctg) {
     await axios
@@ -39,17 +45,17 @@ export default function Products() {
   };
 
   const inexpensive = () => {
-   const filterPrice =  allProducts.filter((items) => {
+    const filterPrice = allProducts.filter((items) => {
       return items.statusPrice !== "expensive";
     });
-    context.newProduct(filterPrice)
+    context.newProduct(filterPrice);
   };
 
   const expensive = () => {
-    const filterPrice =  allProducts.filter((items) => {
+    const filterPrice = allProducts.filter((items) => {
       return items.statusPrice == "expensive";
     });
-    context.newProduct(filterPrice)
+    context.newProduct(filterPrice);
   };
 
   async function searchHandler(event) {
@@ -145,7 +151,8 @@ export default function Products() {
                   </div>
                   <div className="flex-row-center">
                     <FaRegHeart className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer hover:text-red-500" />
-                    <IoEyeOutline className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl bg-gray-200 cursor-pointer hover:text-blue" />
+                    <span onClick={() => InfoHandler(item)}
+                      className=" px-[7px] py-1 text-[18px] rounded-xl bg-gray-200 cursor-pointer hover:text-blue">نمایش</span>
                   </div>
                 </div>
                 <div className="flex-row-center mt-3">
@@ -177,7 +184,6 @@ export default function Products() {
             <Loader />
           )}
         </div>
-
         {/* ================================================================ sort products */}
         <div className="w-full md:w-[23%] xl:w-[25%] mb-5 md:mb-0 md:h-[560px] bg-white ml-5 flex justify-center flex-row md:flex-col rounded-xl py-2 md:pt-4 md:sticky md:top-[90px] shadow-xl">
           <form onSubmit={() => event.preventDefault()} className=" md:mt-0">
@@ -230,7 +236,7 @@ export default function Products() {
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">ایرپاد</span>
                 <input
-                  onClick={() => sortHandler("airpod")}
+                  onClick={() => sortHandler("ایرپاد")}
                   type="radio"
                   name="ctg"
                 />
@@ -238,7 +244,7 @@ export default function Products() {
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">شارژر</span>
                 <input
-                  onClick={() => sortHandler("charger")}
+                  onClick={() => sortHandler("شارژر")}
                   type="radio"
                   name="ctg"
                 />
@@ -246,7 +252,7 @@ export default function Products() {
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">پاوربانک</span>
                 <input
-                  onClick={() => sortHandler("power")}
+                  onClick={() => sortHandler("پاوربانک")}
                   type="radio"
                   name="ctg"
                 />
@@ -254,7 +260,7 @@ export default function Products() {
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">قاب موبایل</span>
                 <input
-                  onClick={() => sortHandler("cover")}
+                  onClick={() => sortHandler("قاب")}
                   type="radio"
                   name="ctg"
                 />
@@ -262,7 +268,7 @@ export default function Products() {
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">هدفون</span>
                 <input
-                  onClick={() => sortHandler("headphon")}
+                  onClick={() => sortHandler("هدفون")}
                   type="radio"
                   name="ctg"
                 />
@@ -270,7 +276,7 @@ export default function Products() {
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">فلش</span>
                 <input
-                  onClick={() => sortHandler("flash")}
+                  onClick={() => sortHandler("فلش")}
                   type="radio"
                   name="ctg"
                 />
@@ -278,7 +284,7 @@ export default function Products() {
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">مموری</span>
                 <input
-                  onClick={() => sortHandler("memori")}
+                  onClick={() => sortHandler("مموری")}
                   type="radio"
                   name="ctg"
                 />
@@ -286,7 +292,7 @@ export default function Products() {
               <div className="mt-3 flex flex-row">
                 <span className="ml-2">ساعت</span>
                 <input
-                  onClick={() => sortHandler("watch")}
+                  onClick={() => sortHandler("ساعت")}
                   type="radio"
                   name="ctg"
                 />

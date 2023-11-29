@@ -7,13 +7,27 @@ import { Autoplay, Pagination, Navigation, EffectFade } from "swiper/modules";
 import Title from "./Title";
 // import { Link } from "react-router-dom";
 import ctg from "../Data/Ctg";
+import axios from "axios";
+import Context from "../Context/context";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Catgory() {
+  const navigate = useNavigate();
+  const context = useContext(Context);
+
   const title = {
     textWhite: "دسته بندی",
     textBlue: "محصولات",
     more: "مشاهده همه",
   };
+  async function sortHandler(ctg) {
+    await axios
+      .get(`http://localhost:3000/product?ctg=${ctg}`)
+      .then((res) => context.newProduct(res.data));
+
+    navigate("/Products");
+  }
   return (
     <>
       <Title title={title} />
@@ -55,7 +69,11 @@ export default function Catgory() {
             className="mySwiper w-full  "
           >
             {ctg.map((item) => (
-              <SwiperSlide key={item.id} className="flex-row-center ">
+              <SwiperSlide
+                onClick={() => sortHandler(item.ctg)}
+                key={item.id}
+                className="flex-row-center cursor-pointer "
+              >
                 <div className=" px-5 py-3  text-[20px] ">
                   <img
                     src={item.src}

@@ -10,12 +10,22 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation, EffectFade } from "swiper/modules";
 import Title from "./Title";
 import offer from "../Data/Data";
+import Context from "../Context/context";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function BestProduct() {
   const title = {
     textWhite: "محصولات",
     textBlue: "پرفروش",
     more: "مشاهده بیشتر",
+  };
+  const context = useContext(Context);
+  const navigate = useNavigate();
+  const InfoHandler = async (item) => {
+    const localInfo = localStorage.setItem("info", JSON.stringify(item));
+    context.showInfoProduct(localInfo);
+    navigate("/ShowProduct");
   };
   return (
     <>
@@ -65,13 +75,14 @@ export default function BestProduct() {
                       <span>40٪ تخفیف</span>
                     </div>
                     <div className="flex-row-center">
-                      <FaRegHeart className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer hover:text-red-500" />
-                      <IoEyeOutline className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl bg-gray-200 cursor-pointer hover:text-blue" />
-                    </div>
+                    <FaRegHeart className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer hover:text-red-500" />
+                    <span onClick={() => InfoHandler(item)}
+                      className=" px-[7px] py-1 text-[18px] rounded-xl bg-gray-200 cursor-pointer hover:text-blue">نمایش</span>
+                  </div>
                   </div>
                   <div className="flex-row-center mt-3">
                     <img
-                      src={item.image}
+                      src={`images/${item.imgae}`}
                       alt=""
                       className="w-[180px] h-[180px] md:w-[180px]  md:h-[180px] items-center"
                     />
@@ -87,7 +98,7 @@ export default function BestProduct() {
                       </button>
                     </div>
                     <div className="flex-col-center text-[17px]">
-                      <span>{item.newPrice}</span>
+                      <span>{item.Price}</span>
                       <del className="text-red-500">{item.oldPrice}</del>
                     </div>
                   </div>

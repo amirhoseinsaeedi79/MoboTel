@@ -2,7 +2,18 @@ import { createContext } from "react";
 
 const Context =createContext({
     allProduct:[],
-    newProduct:()=>{}
+    bestProduct:[],
+    infoProduct:{},
+    statusModal:false,
+    statusbestProduct:false,
+    statusComment:false,
+    statusMenu:false,
+    newProduct:()=>{},
+    showModalMenu:()=>{},
+    showModalComment:()=>{},
+    bestshowModal:()=>{},
+    showInfoProduct:()=>{},
+    showModal:()=>{}
 
 })
 
