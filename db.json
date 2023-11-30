@@ -10,12 +10,26 @@
       "image": "images/profile.jpg"
     },
     {
-      "username": "alis1234",
+      "username": "amirhosein1254",
       "email": "ali@gmail.com",
       "password": "alial123",
       "phone": "09155684412",
       "rasteh": "عادی",
       "id": 2
+    },
+    {
+      "username": "amirhosein2898",
+      "email": "amirhosein@gmail.com",
+      "password": "amir2898",
+      "phone": "09198642898",
+      "id": 3
+    },
+    {
+      "username": "niloofar",
+      "email": "amir@gmail.com",
+      "password": "12345678",
+      "phone": "09195602898",
+      "id": 4
     }
   ],
   "comment": [],

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaCircleUser } from "react-icons/fa6";
 import { FaBasketShopping } from "react-icons/fa6";
 import { TbCategory } from "react-icons/tb";
@@ -15,7 +15,10 @@ import ModalMenu from "./ModalMenu";
 
 export default function Navbar() {
   const context = useContext(Context);
+  const navigate = useNavigate();
+  const userButtom = useRef();
   const [statusMenu, setStatusMenu] = useState(false);
+  const [showUsername, setShowUsername] = useState("");
 
   const Menu = useRef();
   useEffect(() => {
@@ -25,10 +28,29 @@ export default function Navbar() {
         context.showModalMenu(false);
       }
     };
-
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   });
+
+  useEffect(() => {
+    const dataUser = localStorage.getItem("User");
+    if (dataUser != null) {
+      const user = JSON.parse(localStorage.getItem("User"));
+      setShowUsername(user.username);
+      userButtom.current.classList.add("border-green-500");
+      userButtom.current.classList.add("text-green-600");
+    } else {
+      setShowUsername("ورود / ثبت نام");
+    }
+  }, []);
+
+  useEffect(() => {}, []);
+
+  const loginHandler = () => {
+    if (!context.isLogin) {
+      navigate("/Register");
+    }
+  };
 
   const exitMenu = () => {
     setStatusMenu(!statusMenu);
@@ -76,11 +98,13 @@ export default function Navbar() {
           </div>
           {/* ================================================ topbar-left */}
           <div className="topbar-left flex-row-center vazir-bold text-gray-700">
-            <div className="flex-row-center p-2 md:p-3.5 ml-3 cursor-pointer bg-white hover:border hover:border-blue rounded-3xl shadow-md border-[1px] border-gray-200">
+            <div
+              onClick={loginHandler}
+              ref={userButtom}
+              className="flex-row-center p-2 md:p-3.5 ml-3 cursor-pointer bg-white border-[2px] hover:border-[3px]  rounded-3xl shadow-md  border-gray-200"
+            >
               <FaCircleUser className="w-[20px] h-[20px] md:w-[28px] md:h-[28px] text-blue" />
-              <Link to="/Login" className="mr-3 hidden  lg:flex">
-                ورود / ثبت نام
-              </Link>
+              <div className="mr-3 hidden  lg:flex">{showUsername}</div>
             </div>
             <div className="flex-row-center p-2 md:p-3 cursor-pointer bg-gray-300 lg:bg-white hover:border hover:border-blue rounded-3xl shadow-md border-[1px] border-gray-200">
               <FaBasketShopping className="w-[22px] h-[22px] ml-2 md:w-[30px] md:h-[30px] text-blue" />
@@ -166,13 +190,12 @@ export default function Navbar() {
             >
               <span className="mr-1.5 text-[17px] ">سوالات متداول</span>
             </Link>
-            <Link
+            <div
               onClick={exitMenu}
-              to="/Login"
               className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue"
             >
-              <span className="mr-1.5 text-[17px] ">ثبت نام یا ورود</span>
-            </Link>
+              <span className="mr-1.5 text-[17px] ">حساب کاربری</span>
+            </div>
           </div>
         </div>
       </nav>

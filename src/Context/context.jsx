@@ -9,12 +9,18 @@ const Context =createContext({
     statusbestProduct:false,
     statusComment:false,
     statusMenu:false,
+    showForm:false,
+    showPassword:false,
     newProduct:()=>{},
+    ShowPasswordHandler:()=>{},
+    ShowFormHandler:()=>{},
     showOffer:()=>{},
     showModalMenu:()=>{},
     showModalComment:()=>{},
     bestshowModal:()=>{},
     showInfoProduct:()=>{},
+    login:()=>{},
+    logout:()=>{},
     showModal:()=>{}
 
 })

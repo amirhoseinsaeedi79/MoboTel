@@ -8,7 +8,7 @@ import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GetProduct } from "../Services/Axios/Requests/Products";
 import Loader from "../Components/Loader";
 
@@ -29,6 +29,9 @@ export default function Offers() {
       .then((res) => context.newProduct(res.data));
     console.log(context.allProduct);
   }
+  useEffect(()=>{
+    GetProduct().then((res) => context.newProduct(res.data));
+  },[])
 
   const allSelectProducts = () => {
     GetProduct().then((res) => context.newProduct(res.data));

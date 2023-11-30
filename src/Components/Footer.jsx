@@ -8,11 +8,14 @@ export default function Footer() {
     <>
       <footer className="bg-white px-2.5 md:px-7 pt-3 flex  items-center flex-wrap flex-row justify-between py-5">
         <div className=" ">
-          <h3 className="vazir-bold text-[17px] md:text-[20px] text-blue">دسترسی سریع</h3>
+          <h3 className="vazir-bold text-[17px] md:text-[20px] text-blue">
+            دسترسی سریع
+          </h3>
           <div className="flex flex-col text-[15px]">
             <span className="mt-3 hover:text-blue">صفحه اصلی</span>
-            <span className="mt-3 hover:text-blue">ارتباط باما</span>
-            <span className="mt-3 hover:text-blue pl-1">تخفیف ها و پیشنهاد ها</span>
+            <span className="mt-3 hover:text-blue pl-1">
+              تخفیف ها و پیشنهاد ها
+            </span>
             <span className="mt-3 hover:text-blue">دسته بندی محصولات</span>
             <span className="mt-3 hover:text-blue">سوالات متداول</span>
             <span className="mt-3 hover:text-blue">حساب کاربری</span>
@@ -27,7 +30,6 @@ export default function Footer() {
             <span className="mt-3 hover:text-blue">آیفون</span>
             <span className="mt-3 hover:text-blue">سامسونگ</span>
             <span className="mt-3 hover:text-blue">شیایومی</span>
-            <span className="mt-3 hover:text-blue">لنوو</span>
             <span className="mt-3 hover:text-blue">اکو</span>
           </div>
         </div>
@@ -68,11 +70,7 @@ export default function Footer() {
           </div>
           <div className="flex-row-center mb-3">
             <img src="images/rezi.png" alt="" className="w-[80px] h-[80px]" />
-            <img
-              src="images/enamad.png"
-              alt=""
-              className="w-[80px] h-[80px]"
-            />
+            <img src="images/enamad.png" alt="" className="w-[80px] h-[80px]" />
           </div>
           <div className="flex flex-row justify-around mt-8 w-full">
             <img

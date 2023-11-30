@@ -14,7 +14,8 @@ export default {
         blue:"#068fff",
         orginal:'#e6f0fa',
         hover:'#5db5fc',
-        body:'#f4f5f9'
+        body:'#f4f5f9',
+        login:'#90caf9'
       }
     },
   },
