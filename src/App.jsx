@@ -10,6 +10,7 @@ export default function App() {
 
   // ================================================================ All States
   const [allProduct, setAllProduct] = useState([]);
+  const [offersProduct, setOffersProduct] = useState([]);
   const [statusModal, setStatusModal] = useState(false);
   const [statusbestProduct, setStatusBestProduct] = useState(false);
   const [statusComment, setStatusComment] = useState(false);
@@ -26,9 +27,27 @@ export default function App() {
     GetProduct().then(res=>setAllProduct(res.data))
   },[])
 
+  useEffect(()=>{
+    const resultOffers = allProduct.filter((item) => {
+      return item.Discount >= 30;
+    });
+    setOffersProduct(resultOffers);
+  },[allProduct])
+
+  console.log(offersProduct);
+
+
+
   const newProduct = (ctg)=>{
     setAllProduct(ctg)
  }
+
+  const showOffer = (ctg)=>{
+    setOffersProduct(ctg)
+ }
+
+
+
   const showInfoProduct = (ctg)=>{
     setInfoProduct(ctg)
  }
@@ -57,7 +76,9 @@ export default function App() {
       infoProduct,
       statusComment,
       statusMenu,
+      offersProduct,
       newProduct,
+      showOffer,
       showModalMenu,
       showModalComment,
       bestshowModal,

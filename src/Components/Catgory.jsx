@@ -31,7 +31,7 @@ export default function Catgory() {
   return (
     <>
       <Title title={title} />
-      <div className=" px-2.5 md:px-6 pt-3">
+      <div className=" px-2.5 md:px-6 ">
         <div className="lg:w-full  ">
           <Swiper
             spaceBetween={20}
@@ -74,7 +74,7 @@ export default function Catgory() {
                 key={item.id}
                 className="flex-row-center cursor-pointer "
               >
-                <div className=" px-5 py-3  text-[20px] ">
+                <div className=" px-5 pb-3 text-[20px] ">
                   <img
                     src={item.src}
                     alt=""

@@ -9,7 +9,7 @@ export default function Comments() {
 
   return (
     <div className=" py-2 px-2 md:px-3 mx-2 md:mx-3">
-      <div className="mb-10">
+      <div className="mb-9">
         <button
           onClick={() => context.showModalComment(true)}
           className="px-4 py-2 bg-blue hover:text-white shadow-2xl text-[18px] rounded-xl vazir-bold "

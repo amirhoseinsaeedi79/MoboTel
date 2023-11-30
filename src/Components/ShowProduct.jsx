@@ -39,8 +39,8 @@ useEffect(()=>{
 },[quantity])
 console.log(price);
   return (
-    <div className="w-full  pt-[90px] md:pt-24 lg:pt-6 pb-5 ">
-      <div className="flex flex-row items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl  md:mb-7 text-[12px] md:text-[17px] vazir-bold">
+    <div className="w-full  pt-[90px] md:pt-[115px] lg:pt-6 pb-5 ">
+      <div className="flex flex-row items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl  md:mb-8 text-[12px] md:text-[17px] vazir-bold">
         <Link to="/">خانه</Link>
         <MdOutlineChevronLeft className="w-[15px] h-[15px] mx-2" />
         <Link to="/Products" className=" pb-[2px] cursor-pointer">
@@ -49,13 +49,13 @@ console.log(price);
         <MdOutlineChevronLeft className="w-[15px] h-[15px] mx-2" />
         <span className="text-blue pb-[2px] cursor-pointer">{info.ctg}</span>
       </div>
-      <div className="flex-col-center  flex md:flex-row md:justify-between lg:justify-center  bg-white rounded-xl shadow-xl mt-5 py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 ">
+      <div className="flex-col-center  flex md:flex-row md:justify-between lg:justify-center  bg-white rounded-xl shadow-xl mb-8 mt-5 py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 ">
         {/* ============================================= image product */}
         <div className="  relative md:ml-5 w-[85%] md:w-[45%] lg:w-[32%] xl:w-[23%] pt-2 md:pr-1 bg-body border-[1px] border-gray-200 shadow-2xl rounded-xl">
           <ImgSlider item={info} />
         </div>
         {/* ============================================= info product */}
-        <div className="w-full xl:ml-16 lg:mr-3  mt-5">
+        <div className="w-full xl:ml-16 lg:mr-3 mb-5 mt-5">
           <div className="w-full flex-col-center md:flex md:flex-col md:items-start border-b-[3px] pb-3">
             <span className="text-[17px] md:text-[22px] lg:text-[25px] vazir-bold">{info.name}</span>
             <span className="text-[15px]  vazir-bold text-blue mt-3">
@@ -126,7 +126,7 @@ console.log(price);
           </div>
           <div className="bg-body py-5 mt-5 px-5 flex-col-center lg:flex-row-center rounded-xl border-[2px] shadow-xl">
             <div className="w-full flex-row-center lg:flex lg:flex-row lg:justify-start text-[16px] lg:text-[19px] mb-5 lg:mb-0">
-              <del className="text-gray-400 pl-2 border-l-2 border-gray-400 ">1200000 تومان</del>
+              <del className="text-gray-400 pl-2 border-l-2 border-gray-400 ">{info.price + (info.price * info.Discount) / 100} تومان</del>
               <span className="px-2 text-blue ">{info.price} تومان</span>
             </div>
             <div className="flex-row-center">
