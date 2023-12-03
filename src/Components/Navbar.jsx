@@ -41,14 +41,16 @@ export default function Navbar() {
       userButtom.current.classList.add("text-green-600");
     } else {
       setShowUsername("ورود / ثبت نام");
+      userButtom.current.classList.remove("border-green-500");
+      userButtom.current.classList.remove("text-green-600");
     }
-  }, []);
-
-  useEffect(() => {}, []);
+  },[]);
 
   const loginHandler = () => {
-    if (!context.isLogin) {
+    if (showUsername == "ورود / ثبت نام") {
       navigate("/Register");
+    } else {
+      navigate("/UserAdmin/Profile");
     }
   };
 
@@ -71,9 +73,9 @@ export default function Navbar() {
             <IoMenu onClick={openMenu} className="w-9 h-9 ml-3 lg:hidden " />
             <Link to="/">
               <img
-                src="images/logo.jpg"
+                src="/public/images/logo.jpg"
                 alt="logo"
-                className="w-[100px] h-[40px]  md:w-[140px] md:h-[55px] lg:hidden"
+                className="w-[120px] h-[45px]   md:w-[140px] md:h-[50px] lg:hidden"
               />
             </Link>
             <div className="relative  mr-5 lg:mr-0 hidden lg:flex">
@@ -101,7 +103,7 @@ export default function Navbar() {
             <div
               onClick={loginHandler}
               ref={userButtom}
-              className="flex-row-center p-2 md:p-3.5 ml-3 cursor-pointer bg-white border-[2px] hover:border-[3px]  rounded-3xl shadow-md  border-gray-200"
+              className="flex-row-center p-2 md:p-3 ml-3 cursor-pointer bg-white border-[2px] hover:border-[3px]  rounded-3xl shadow-md  border-gray-200"
             >
               <FaCircleUser className="w-[20px] h-[20px] md:w-[28px] md:h-[28px] text-blue" />
               <div className="mr-3 hidden  lg:flex">{showUsername}</div>
@@ -119,7 +121,7 @@ export default function Navbar() {
 
         <div
           ref={Menu}
-          className={`w-[320px] h-[100vh] bg-white fixed top-0 right-0 z-[99999] p-3 ${
+          className={`w-[320px] h-[100vh] bg-white fixed top-0 right-0 transition-all ease-in-out duration-200 z-[99999] p-3 ${
             statusMenu ? "visible" : "hidden"
           }`}
         >
@@ -135,7 +137,7 @@ export default function Navbar() {
           <div className="flex-col-center pt-5">
             <Link to="/">
               <img
-                src="images/logo.jpg"
+                src="src/assets/images/logo.jpg"
                 alt="logo"
                 className="w-[135px] h-[60px]"
               />
@@ -218,7 +220,7 @@ export default function Navbar() {
           </Link>
           <Link to="/">
             <img
-              src="images/logo.jpg"
+              src="/public/images/logo.jpg"
               alt="logo"
               className="w-[140px] h-[55px] mr-7 ml-7"
             />

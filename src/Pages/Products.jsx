@@ -14,6 +14,7 @@ import Title from "../Components/Title";
 import { useContext, useEffect, useState } from "react";
 import { GetProduct } from "../Services/Axios/Requests/Products";
 import Loader from "../Components/Loader";
+import { toast } from "react-toastify";
 
 export default function Products() {
   const context = useContext(Context);
@@ -43,6 +44,76 @@ export default function Products() {
   const allSelectProducts = () => {
     GetProduct().then((res) => context.newProduct(res.data));
   };
+
+  // =============================================== locals favorate start
+  const addToListFavorate = (item) => {
+    if (context.isLogin == false) {
+      toast.error("لطفا ابتدا وارد حساب خود شوید", {
+        position: "top-center",
+        autoClose: 1200,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      
+    }
+
+    const dataLocalStorage = localStorage.getItem("Favorate");
+    if (dataLocalStorage == null && context.isLogin == true) {
+      localStorage.setItem("Favorate", JSON.stringify([item]));
+      toast.success("به علاقه مندی ها اضافه شد", {
+        position: "top-center",
+        autoClose: 1200,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+
+
+    } else {
+      const allData_LocalStorage = JSON.parse(localStorage.getItem("Favorate"));
+      const result = allData_LocalStorage.some((items) => {
+        return items.name == item.name;
+      });
+
+      if (result && context.isLogin == true) {
+        const items_filter = allData_LocalStorage.filter((items) => {
+          return items.name !== item.name;
+        });
+        localStorage.setItem("Favorate", JSON.stringify(items_filter));
+        toast.error("از علاقه مندی ها حذف شد", {
+          position: "top-center",
+          autoClose: 1200,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else if (!result && context.isLogin == true) {
+        allData_LocalStorage.push(item);
+        localStorage.setItem("Favorate", JSON.stringify(allData_LocalStorage));
+        toast.success("به علاقه مندی ها اضافه شد", {
+          position: "top-center",
+          autoClose: 1200,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    }
+  };
+  // =============================================== locals favorate finish
 
   const inexpensive = () => {
     const filterPrice = allProducts.filter((items) => {
@@ -150,7 +221,10 @@ export default function Products() {
                     <span>{item.Discount}٪ تخفیف</span>
                   </div>
                   <div className="flex-row-center">
-                    <FaRegHeart className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer hover:text-red-500" />
+                    <FaRegHeart
+                      onClick={() => addToListFavorate(item)}
+                      className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer text-red-500"
+                    />
                     <span
                       onClick={() => InfoHandler(item)}
                       className=" px-[7px] py-1 text-[16px] rounded-xl bg-gray-200 cursor-pointer hover:text-blue"

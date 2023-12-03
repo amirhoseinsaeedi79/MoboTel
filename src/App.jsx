@@ -6,9 +6,12 @@ import Context from "./Context/context.jsx";
 import { useEffect, useState } from "react";
 import { GetProduct } from "./Services/Axios/Requests/Products.jsx";
 import GotoUp from "./Components/GotoUp.jsx";
+import { GetUser } from "./Services/Axios/Requests/Users.jsx";
+import axios from "axios";
 export default function App() {
   // ================================================================ All States
   const [allProduct, setAllProduct] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [offersProduct, setOffersProduct] = useState([]);
   const [statusModal, setStatusModal] = useState(false);
   const [statusbestProduct, setStatusBestProduct] = useState(false);
@@ -19,37 +22,65 @@ export default function App() {
   const [showPassword, setShowPassword] = useState(false);
   const [infoProduct, setInfoProduct] = useState({});
   const [isLogin, setIsLogin] = useState(false);
+  const [orderModal, setOrderModal] = useState(false);
+  const [showModalTicket, setShowModalTicket] = useState(false);
+  const [showAddModalTicket, setShowAddModalTicket] = useState(false);
+  const [allTicket, setAllTicket] = useState([]);
   // ================================================================ All functions
   const { pathname: location } = useLocation();
   let router = useRoutes(Router);
 
-
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (window.location.pathname == "/Register") {
+    if (
+      window.location.pathname == "/Register" &&
+      window.location.pathname == "/UserAdmin/Profile"
+    ) {
       setStatusRoute(true);
     } else {
       setStatusRoute(false);
     }
-  },[location]);
+  }, [location]);
 
+  async function getAll_users() {
+    const userInfo = JSON.parse(localStorage.getItem("User"));
+    await axios
+      .get(`http://localhost:3000/user?id=${userInfo.id}`)
+      .then((res) => setAllTicket(res.data[0].tickets.reverse()))
+  }
   useEffect(() => {
     GetProduct().then((res) => setAllProduct(res.data));
-  },[]);
+    GetUser().then((res) => setAllUsers(res.data));
+    getAll_users();
+  }, []);
+
 
   useEffect(() => {
     const resultOffers = allProduct.filter((item) => {
       return item.Discount >= 30;
     });
     setOffersProduct(resultOffers);
-  },[allProduct]);
+  }, [allProduct]);
 
   const newProduct = (ctg) => {
     setAllProduct(ctg);
   };
 
+  const showTicket_Modal = (ctg) => {
+    setShowModalTicket(ctg);
+  };
+  const getNew_AllTicket = (ctg) => {
+    setAllTicket(ctg);
+  };
+  const AddTicket_Modal = (ctg) => {
+    setShowAddModalTicket(ctg);
+  };
+
   const showOffer = (ctg) => {
     setOffersProduct(ctg);
+  };
+  const showOrder = (ctg) => {
+    setOrderModal(ctg);
   };
 
   const showInfoProduct = (ctg) => {
@@ -75,32 +106,35 @@ export default function App() {
   const bestshowModal = (status) => {
     setStatusBestProduct(status);
   };
+  const getAllUser = (status) => {
+    setAllUsers(status);
+  };
 
-
-  async function login(newtoken){
+  async function login(newtoken) {
     localStorage.setItem("User", JSON.stringify(newtoken));
     setIsLogin(true);
   }
-  
+
   function logout() {
     localStorage.removeItem("User");
     setIsLogin(false);
   }
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const user = localStorage.getItem("User");
-    if(user !=null){
+    if (user != null) {
       setIsLogin(true);
-    }else{
+    } else {
       setIsLogin(false);
     }
-  },[])
+  }, []);
   console.log("isloggin:", isLogin);
 
   return (
     <Context.Provider
       value={{
         allProduct,
+        allTicket,
         statusModal,
         statusbestProduct,
         infoProduct,
@@ -109,7 +143,17 @@ export default function App() {
         offersProduct,
         showForm,
         showPassword,
+        orderModal,
+        isLogin,
+        allUsers,
+        showModalTicket,
+        showAddModalTicket,
         newProduct,
+        AddTicket_Modal,
+        getNew_AllTicket,
+        showTicket_Modal,
+        getAllUser,
+        showOrder,
         login,
         logout,
         ShowPasswordHandler,

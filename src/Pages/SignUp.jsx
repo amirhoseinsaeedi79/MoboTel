@@ -15,12 +15,26 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
 
+    const AllTicket = 
+    {
+      id: 1,
+      title: "برگشت وجه ",
+      text: "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید ",
+      time: "1402/03/14",
+      anserAdmin:
+        "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
+      status: "بسته شده‌",
+      dataAnswer: "1402/03/15",
+    }
+
   function registerHandler(data) {
     const newUser = {
       username: data.username,
       email: data.email,
       password: data.password,
       phone: data.phone,
+      favourites:[],
+      tickets:[AllTicket]
     };
 
     if (data.password !== data.reapetPassword) {
@@ -35,8 +49,8 @@ export default function SignUp() {
         theme: "colored",
       });
     } else {
-      PostUser(newUser).then((res) => console.log(res));
-      context.login(newUser);
+      PostUser(newUser).then((res) => context.login(res.data));
+     
       reset();
       navigate(-1);
       toast.success("ثبت نام با موفقیت انجام شد", {

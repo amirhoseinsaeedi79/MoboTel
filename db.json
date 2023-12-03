@@ -7,29 +7,87 @@
       "phone": "09198642898",
       "rasteh": "ادمین",
       "id": 1,
-      "image": "images/profile.jpg"
+      "image": "images/profile.jpg",
+      "favourites": []
     },
     {
-      "username": "amirhosein1254",
-      "email": "ali@gmail.com",
-      "password": "alial123",
-      "phone": "09155684412",
-      "rasteh": "عادی",
+      "username": "Amir2898",
+      "email": "amir@gmail.com",
+      "password": "amir2898",
+      "phone": "09195602898",
+      "favourites": [],
+      "tickets": [
+        {
+          "id": 1,
+          "title": "برگشت وجه ",
+          "text": "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید ",
+          "time": "1402/03/14",
+          "anserAdmin": "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
+          "status": "بسته شده‌",
+          "dataAnswer": "1402/03/15"
+        }
+      ],
       "id": 2
     },
     {
-      "username": "amirhosein2898",
-      "email": "amirhosein@gmail.com",
-      "password": "amir2898",
-      "phone": "09198642898",
-      "id": 3
+      "username": "aaaaaaaaaaaa",
+      "email": "amir2222@gmail.com",
+      "password": "aaaaaaaa",
+      "phone": "091562256566",
+      "favourites": [],
+      "tickets": [
+        {
+          "id": 1,
+          "title": "برگشت وجه ",
+          "text": "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید ",
+          "time": "1402/03/14",
+          "anserAdmin": "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
+          "status": "بسته شده‌",
+          "dataAnswer": "1402/03/15"
+        },
+        {
+          "title": "5555555555555",
+          "text": "55555555555555555555555",
+          "status": "درحال بررسی"
+        },
+        {
+          "title": "ddddd",
+          "text": "dddddddddddd",
+          "status": "درحال بررسی"
+        },
+        {
+          "title": "aaaaaaa",
+          "text": "aaaaaaaaaaaa",
+          "status": "درحال بررسی"
+        }
+      ],
+      "id": 4
     },
     {
-      "username": "niloofar",
-      "email": "amir@gmail.com",
-      "password": "12345678",
-      "phone": "09195602898",
-      "id": 4
+      "username": "AmirHosein2898",
+      "email": "niloofar@gmail.com",
+      "password": "wwwwwwww",
+      "phone": "09198642898",
+      "favourites": [],
+      "tickets": [
+        {
+          "id": 1,
+          "title": "برگشت وجه ",
+          "text": "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید ",
+          "time": "1402/03/14",
+          "anserAdmin": "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
+          "status": "بسته شده‌",
+          "dataAnswer": "1402/03/15"
+        },
+        {
+          "title": "dddddddddd",
+          "text": "dddddddddddd",
+          "status": "درحال بررسی"
+        }
+      ],
+      "id": 5,
+      "fullname": "امیرحسین سعیدی",
+      "address": "تهران / اختیاریه جنوبی پلاک 85"
     }
   ],
   "comment": [],
