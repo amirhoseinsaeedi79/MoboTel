@@ -52,7 +52,6 @@ export default function SignUp() {
       PostUser(newUser).then((res) => context.login(res.data));
      
       reset();
-      navigate(-1);
       toast.success("ثبت نام با موفقیت انجام شد", {
         position: "top-center",
         autoClose: 1500,

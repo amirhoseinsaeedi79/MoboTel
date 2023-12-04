@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import Context from "../Context/context";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MdOutlineChevronLeft } from "react-icons/md";
 import ImgSlider from "./ImgSlider";
 import { AiFillSafetyCertificate } from "react-icons/ai";

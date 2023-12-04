@@ -10,11 +10,15 @@ import History from "./Components/SubRouts/History";
 import LoveProducts from "./Components/SubRouts/LoveProducts";
 import Tickets from "./Components/SubRouts/Tickets";
 import Profile from "./Components/SubRouts/Profile";
+import Cart from "./Pages/Cart";
+import Payment from "./Pages/Payment";
 
 let routes = [
   { path: "/", element: <Home /> },
   { path: "/Register", element: <Register /> },
   { path: "/Questions", element: <Questions /> },
+  { path: "/Cart", element: <Cart/> },
+  { path: "/Payment", element: <Payment/> },
   { path: "/Offers", element: <Offers /> },
   { path: "/Products", element: <Products /> },
   { path: "/ShowProduct", element: <ShowProduct /> },

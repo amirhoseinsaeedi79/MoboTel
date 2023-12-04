@@ -5,11 +5,13 @@ export default function LoveProducts() {
 
   useEffect(() => {
     const dataAt_localStorage = JSON.parse(localStorage.getItem("Favorate"));
+    dataAt_localStorage.reverse();
     setFavorate(dataAt_localStorage);
   }, []);
 
   const removeItem = (item) => {
     const dataAt_localStorage = JSON.parse(localStorage.getItem("Favorate"));
+    dataAt_localStorage.reverse();
     const items_filter = dataAt_localStorage.filter((items) => {
       return items.name !== item.name;
     });

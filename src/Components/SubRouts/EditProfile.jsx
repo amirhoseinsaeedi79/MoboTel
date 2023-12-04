@@ -3,10 +3,12 @@ import { useForm } from "react-hook-form";
 import { PatchUser } from "../../Services/Axios/Requests/Users";
 import Context from "../../Context/context";
 import { toast } from "react-toastify";
+import { useNavigate, useNavigation } from "react-router-dom";
 export default function EditProfile() {
   const [showUsername, setShowUsername] = useState("");
 
   const context = useContext(Context);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("User"));
@@ -44,6 +46,7 @@ export default function EditProfile() {
       theme: "colored",
     });
     context.login(editUser);
+    context.setShow_Username(editUser.username)
   }
 
   return (

@@ -12,13 +12,11 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import Context from "../Context/context";
 import ModalMenu from "./ModalMenu";
-
 export default function Navbar() {
   const context = useContext(Context);
   const navigate = useNavigate();
   const userButtom = useRef();
   const [statusMenu, setStatusMenu] = useState(false);
-  const [showUsername, setShowUsername] = useState("");
 
   const Menu = useRef();
   useEffect(() => {
@@ -36,18 +34,18 @@ export default function Navbar() {
     const dataUser = localStorage.getItem("User");
     if (dataUser != null) {
       const user = JSON.parse(localStorage.getItem("User"));
-      setShowUsername(user.username);
+      context.setShow_Username(user.username);
       userButtom.current.classList.add("border-green-500");
       userButtom.current.classList.add("text-green-600");
     } else {
-      setShowUsername("ورود / ثبت نام");
+      context.setShow_Username("ورود / ثبت نام");
       userButtom.current.classList.remove("border-green-500");
       userButtom.current.classList.remove("text-green-600");
     }
-  },[]);
+  });
 
   const loginHandler = () => {
-    if (showUsername == "ورود / ثبت نام") {
+    if (!context.isLogin) {
       navigate("/Register");
     } else {
       navigate("/UserAdmin/Profile");
@@ -106,24 +104,24 @@ export default function Navbar() {
               className="flex-row-center p-2 md:p-3 ml-3 cursor-pointer bg-white border-[2px] hover:border-[3px]  rounded-3xl shadow-md  border-gray-200"
             >
               <FaCircleUser className="w-[20px] h-[20px] md:w-[28px] md:h-[28px] text-blue" />
-              <div className="mr-3 hidden  lg:flex">{showUsername}</div>
+              <div className="mr-3 hidden  lg:flex">{context.showUsername}</div>
             </div>
-            <div className="flex-row-center p-2 md:p-3 cursor-pointer bg-gray-300 lg:bg-white hover:border hover:border-blue rounded-3xl shadow-md border-[1px] border-gray-200">
+            <Link to="/Cart" className="flex-row-center p-2 md:p-3 cursor-pointer bg-gray-300 lg:bg-white hover:border hover:border-blue rounded-3xl shadow-md border-[1px] border-gray-200">
               <FaBasketShopping className="w-[22px] h-[22px] ml-2 md:w-[30px] md:h-[30px] text-blue" />
-              <span className="mx-3 hidden lg:flex">سبد خرید</span>
+              <span  className="mx-3 hidden lg:flex">سبد خرید</span>
               <span className="px-2 py-1 lg:px-2 lg:py-1 text-[13px] lg:text-[15px] rounded-full bg-blue text-white shadow-xl ">
                 2
               </span>
-            </div>
+            </Link>
           </div>
         </div>
         {/* ================================================ hamburger Menu */}
 
         <div
           ref={Menu}
-          className={`w-[320px] h-[100vh] bg-white fixed top-0 right-0 transition-all ease-in-out duration-200 z-[99999] p-3 ${
-            statusMenu ? "visible" : "hidden"
-          }`}
+          className={`w-[320px] h-[100vh] bg-white fixed top-0 ${
+            !statusMenu ? "right-[-320px]" : "right-0"
+          } transition-all ease-in-out duration-500 z-[99999] p-3 `}
         >
           <div className="flex flex-row justify-between items-center vazir-bold ">
             <Link to="/" className="text-[20px]">

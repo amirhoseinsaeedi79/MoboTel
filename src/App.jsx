@@ -8,6 +8,7 @@ import { GetProduct } from "./Services/Axios/Requests/Products.jsx";
 import GotoUp from "./Components/GotoUp.jsx";
 import { GetUser } from "./Services/Axios/Requests/Users.jsx";
 import axios from "axios";
+
 export default function App() {
   // ================================================================ All States
   const [allProduct, setAllProduct] = useState([]);
@@ -26,6 +27,7 @@ export default function App() {
   const [showModalTicket, setShowModalTicket] = useState(false);
   const [showAddModalTicket, setShowAddModalTicket] = useState(false);
   const [allTicket, setAllTicket] = useState([]);
+  const [showUsername, setShowUsername] = useState("ورود / ثبت نام");
   // ================================================================ All functions
   const { pathname: location } = useLocation();
   let router = useRoutes(Router);
@@ -33,8 +35,7 @@ export default function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (
-      window.location.pathname == "/Register" &&
-      window.location.pathname == "/UserAdmin/Profile"
+      window.location.pathname == "/Register" 
     ) {
       setStatusRoute(true);
     } else {
@@ -46,14 +47,13 @@ export default function App() {
     const userInfo = JSON.parse(localStorage.getItem("User"));
     await axios
       .get(`http://localhost:3000/user?id=${userInfo.id}`)
-      .then((res) => setAllTicket(res.data[0].tickets.reverse()))
+      .then((res) => setAllTicket(res.data[0].tickets.reverse()));
   }
   useEffect(() => {
     GetProduct().then((res) => setAllProduct(res.data));
     GetUser().then((res) => setAllUsers(res.data));
     getAll_users();
   }, []);
-
 
   useEffect(() => {
     const resultOffers = allProduct.filter((item) => {
@@ -64,6 +64,9 @@ export default function App() {
 
   const newProduct = (ctg) => {
     setAllProduct(ctg);
+  };
+  const setShow_Username = (ctg) => {
+    setShowUsername(ctg);
   };
 
   const showTicket_Modal = (ctg) => {
@@ -148,7 +151,9 @@ export default function App() {
         allUsers,
         showModalTicket,
         showAddModalTicket,
+        showUsername,
         newProduct,
+        setShow_Username,
         AddTicket_Modal,
         getNew_AllTicket,
         showTicket_Modal,
