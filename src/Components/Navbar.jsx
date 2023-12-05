@@ -17,8 +17,15 @@ export default function Navbar() {
   const navigate = useNavigate();
   const userButtom = useRef();
   const [statusMenu, setStatusMenu] = useState(false);
-
+  const [allCart, setAllCart] = useState([]);
+  const [numberCart, setNumberCart] = useState(0);
   const Menu = useRef();
+  useEffect(() => {
+    const dataAt_localStorage = JSON.parse(localStorage.getItem("Cart"));
+    dataAt_localStorage.reverse();
+    setAllCart(dataAt_localStorage);
+  });
+
   useEffect(() => {
     let handler = (e) => {
       if (!Menu.current.contains(e.target)) {
@@ -51,6 +58,15 @@ export default function Navbar() {
       navigate("/UserAdmin/Profile");
     }
   };
+
+  useEffect(() => {
+    let total_Number = 0;
+    for (let obj of allCart) {
+      total_Number += obj.q;
+    }
+    const resultOffer = total_Number;
+    setNumberCart(resultOffer);
+  }, [allCart]);
 
   const exitMenu = () => {
     setStatusMenu(!statusMenu);
@@ -101,16 +117,19 @@ export default function Navbar() {
             <div
               onClick={loginHandler}
               ref={userButtom}
-              className="flex-row-center p-2 md:p-3 ml-3 cursor-pointer bg-white border-[2px] hover:border-[3px]  rounded-3xl shadow-md  border-gray-200"
+              className="flex-row-center p-2 md:p-[10px] ml-3 cursor-pointer bg-white border-[2px] hover:border-blue  rounded-3xl shadow-md  border-gray-200"
             >
               <FaCircleUser className="w-[20px] h-[20px] md:w-[28px] md:h-[28px] text-blue" />
               <div className="mr-3 hidden  lg:flex">{context.showUsername}</div>
             </div>
-            <Link to="/Cart" className="flex-row-center p-2 md:p-3 cursor-pointer bg-gray-300 lg:bg-white hover:border hover:border-blue rounded-3xl shadow-md border-[1px] border-gray-200">
-              <FaBasketShopping className="w-[22px] h-[22px] ml-2 md:w-[30px] md:h-[30px] text-blue" />
-              <span  className="mx-3 hidden lg:flex">سبد خرید</span>
-              <span className="px-2 py-1 lg:px-2 lg:py-1 text-[13px] lg:text-[15px] rounded-full bg-blue text-white shadow-xl ">
-                2
+            <Link
+              to="/Cart"
+              className={`flex-row-center items-center p-2  md:p-[10px] cursor-pointer bg-gray-300 lg:bg-white   hover:border-blue rounded-3xl shadow-md border-[2px] ${numberCart >=1 ? ("border-green-500") : ("border-gray-300")}`}
+            >
+              <FaBasketShopping className={`w-[22px] h-[22px] md:w-[30px] md:h-[30px] ml-2 ${numberCart >=1 ? ("text-green-500") : ("text-blue")}`} />
+              <span className="mx-3 hidden lg:flex">سبد خرید</span>
+              <span className="px-2  lg:px-2  text-[16px]  lg:text-[16px] pt-[2px] rounded-full bg-blue text-white shadow-xl ">
+                {numberCart}
               </span>
             </Link>
           </div>

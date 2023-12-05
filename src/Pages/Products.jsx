@@ -14,20 +14,18 @@ import Title from "../Components/Title";
 import { useContext, useEffect, useState } from "react";
 import { GetProduct } from "../Services/Axios/Requests/Products";
 import Loader from "../Components/Loader";
-import { toast } from "react-toastify";
-
+import useAddToListFavorate from "../Components/useAddToFavorate.jsx";
+import useAddToCart from "../Components/useAddToCar";
 export default function Products() {
   const context = useContext(Context);
+  const navigate = useNavigate();
   // ============================================================ states
   const [allProducts, setAllProducts] = useState([]);
   const [search, setSearch] = useState("");
-
   // ============================================================ functions
   useEffect(() => {
     GetProduct().then((res) => setAllProducts(res.data));
   }, [search]);
-
-  const navigate = useNavigate();
 
   const InfoHandler = async (item) => {
     const localInfo = localStorage.setItem("info", JSON.stringify(item));
@@ -46,74 +44,6 @@ export default function Products() {
   };
 
   // =============================================== locals favorate start
-  const addToListFavorate = (item) => {
-    if (context.isLogin == false) {
-      toast.error("لطفا ابتدا وارد حساب خود شوید", {
-        position: "top-center",
-        autoClose: 1200,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-      
-    }
-
-    const dataLocalStorage = localStorage.getItem("Favorate");
-    if (dataLocalStorage == null && context.isLogin == true) {
-      localStorage.setItem("Favorate", JSON.stringify([item]));
-      toast.success("به علاقه مندی ها اضافه شد", {
-        position: "top-center",
-        autoClose: 1200,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-
-
-    } else {
-      const allData_LocalStorage = JSON.parse(localStorage.getItem("Favorate"));
-      const result = allData_LocalStorage.some((items) => {
-        return items.name == item.name;
-      });
-
-      if (result && context.isLogin == true) {
-        const items_filter = allData_LocalStorage.filter((items) => {
-          return items.name !== item.name;
-        });
-        localStorage.setItem("Favorate", JSON.stringify(items_filter));
-        toast.error("از علاقه مندی ها حذف شد", {
-          position: "top-center",
-          autoClose: 1200,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      } else if (!result && context.isLogin == true) {
-        allData_LocalStorage.push(item);
-        localStorage.setItem("Favorate", JSON.stringify(allData_LocalStorage));
-        toast.success("به علاقه مندی ها اضافه شد", {
-          position: "top-center",
-          autoClose: 1200,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      }
-    }
-  };
-  // =============================================== locals favorate finish
 
   const inexpensive = () => {
     const filterPrice = allProducts.filter((items) => {
@@ -222,7 +152,9 @@ export default function Products() {
                   </div>
                   <div className="flex-row-center">
                     <FaRegHeart
-                      onClick={() => addToListFavorate(item)}
+                      onClick={() =>
+                        useAddToListFavorate(item, context.isLogin)
+                      }
                       className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer text-red-500"
                     />
                     <span
@@ -233,19 +165,19 @@ export default function Products() {
                     </span>
                   </div>
                 </div>
-                <div className="flex-row-center mt-3">
+                <div  onClick={() => InfoHandler(item)} className="flex-row-center cursor-pointer mt-3">
                   <img
                     src={`images/${item.imgae}`}
                     alt=""
                     className="w-[180px] h-[180px] md:w-[150px]  md:h-[145px] items-center"
                   />
                 </div>
-                <div className="flex-row-center mt-4 lg:text-[17px] vazir-bold  ">
+                <div  onClick={() => InfoHandler(item)} className="flex-row-center cursor-pointer mt-4 lg:text-[17px] vazir-bold  ">
                   <span className="h-[24px] overflow-hidden">{item.name}</span>
                 </div>
                 <div className="flex flex-row-reverse items-center justify-between mt-3 ">
                   <div className="py-2">
-                    <button className="flex-row-center text-white bg-blue rounded-xl px-2 py-1  hover:text-black">
+                    <button  onClick={() => useAddToCart(item, context.isLogin)}  className="flex-row-center text-white bg-blue rounded-xl px-2 py-1  hover:text-black">
                       <CiShoppingBasket className="w-[25px] h-[25px]" />
                       <span className="text-[16px]">سفارش</span>
                     </button>

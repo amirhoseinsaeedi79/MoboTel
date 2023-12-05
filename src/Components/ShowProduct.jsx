@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { MdOutlineChevronLeft } from "react-icons/md";
 import ImgSlider from "./ImgSlider";
 import { AiFillSafetyCertificate } from "react-icons/ai";
@@ -9,34 +9,48 @@ import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import Title from "./Title.jsx";
 import Comments from "./Comments";
+import Context from "../Context/context";
+import useAddToCar from "./useAddToCar";
+import useAddToCart from "./useAddToCar";
 export default function ShowProduct() {
-  // ================================================== all states 
+  // ================================================== all states
   const [info, setInfo] = useState({});
   const [color, setColor] = useState("سفید");
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  // const context = useContext(Context);
+  const context = useContext(Context);
 
-const ButtonRef = useRef()
-const title = {
-  textWhite: "نظرات",
-  textBlue: "کاربران",
-  more: "مشاهده نظرات",
-};
+  const ButtonRef = useRef();
+  const title = {
+    textWhite: "نظرات",
+    textBlue: "کاربران",
+    more: "مشاهده نظرات",
+  };
 
   useEffect(() => {
     const localInfo = JSON.parse(localStorage.getItem("info"));
     setInfo(localInfo);
-  },[]);
-  
-useEffect(()=>{
-  if(quantity==1){
-    ButtonRef.current.disabled=true;
-  }else{
-    ButtonRef.current.disabled=false;
-  }
-},[quantity])
-console.log(price);
+  }, []);
+
+  const infoProduct = {
+    id: info.id,
+    name: info.name,
+    ctg: info.ctg,
+    price: info.price,
+    q: quantity,
+    color: color,
+    imgae: info.imgae,
+    Discount: info.Discount,
+  };
+
+  useEffect(() => {
+    if (quantity == 1) {
+      ButtonRef.current.disabled = true;
+    } else {
+      ButtonRef.current.disabled = false;
+    }
+  }, [quantity]);
+  console.log(price);
   return (
     <div className="w-full  pt-[90px] md:pt-[115px] lg:pt-6 pb-5 ">
       <div className="flex flex-row items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl  md:mb-8 text-[12px] md:text-[17px] vazir-bold">
@@ -56,7 +70,9 @@ console.log(price);
         {/* ============================================= info product */}
         <div className="w-full xl:ml-16 lg:mr-3 mb-5 mt-5">
           <div className="w-full flex-col-center md:flex md:flex-col md:items-start border-b-[3px] pb-3">
-            <span className="text-[17px] md:text-[22px] lg:text-[25px] vazir-bold">{info.name}</span>
+            <span className="text-[17px] md:text-[22px] lg:text-[25px] vazir-bold">
+              {info.name}
+            </span>
             <span className="text-[15px]  vazir-bold text-blue mt-3">
               محصولی اورجینال و با ضمانت موبوتل
             </span>
@@ -119,30 +135,51 @@ console.log(price);
               </div>
             </div>
             <div className="w-full flex-row-center md:flex md:flex-row  mt-4">
-              <GoAlertFill className="w-[30px] h-[30px] text-red-500 ml-1"/>
-              <span className="w-full border-r-2 border-red-500 pr-2">درخواست مرجوع کردن کالا در گروه {info.ctg} با دلیل "انصراف از خرید" تنها در صورتی قابل تایید است که کالا در شرایط اولیه باشد (در صورت پلمپ بودن، کالا نباید باز شده باشد).</span>
+              <GoAlertFill className="w-[30px] h-[30px] text-red-500 ml-1" />
+              <span className="w-full border-r-2 border-red-500 pr-2">
+                درخواست مرجوع کردن کالا در گروه {info.ctg} با دلیل "انصراف از
+                خرید" تنها در صورتی قابل تایید است که کالا در شرایط اولیه باشد
+                (در صورت پلمپ بودن، کالا نباید باز شده باشد).
+              </span>
             </div>
           </div>
           <div className="bg-body py-5 mt-5 px-5 flex-col-center lg:flex-row-center rounded-xl border-[2px] shadow-xl">
             <div className="w-full flex-row-center lg:flex lg:flex-row lg:justify-start text-[16px] lg:text-[19px] mb-5 lg:mb-0">
-              <del className="text-gray-400 pl-2 border-l-2 border-gray-400 ">{info.price + (info.price * info.Discount) / 100} تومان</del>
+              <del className="text-gray-400 pl-2 border-l-2 border-gray-400 ">
+                {info.price + (info.price * info.Discount) / 100} تومان
+              </del>
               <span className="px-2 text-blue ">{info.price} تومان</span>
             </div>
             <div className="flex-row-center">
-              <div>
-                <button className="bg-blue text-white w-[120px] py-2 rounded-xl text-[17px]">سفارش محصول</button>
+              <div onClick={() => useAddToCart(infoProduct, context.isLogin)}>
+                <button className="bg-blue text-white w-[120px] py-2 rounded-xl text-[17px]">
+                  سفارش محصول
+                </button>
               </div>
               <div className="flex-row-center mr-10">
-              <button onClick={()=>setQuantity(prev=>prev+1)} className="bg-blue px-3  py-2.5  rounded-r-3xl "><FaPlus/></button>
-              <span className="px-3  pt-[6px] bg-white text-[20px] vazir-bold">{quantity}</span>
-              <button ref={ButtonRef} onClick={()=>setQuantity(prev=>prev-1)} className="bg-blue px-3 py-2.5 rounded-l-3xl cursor-pointer"><FaMinus/></button>
+                <button
+                  onClick={() => setQuantity((prev) => prev + 1)}
+                  className="bg-blue px-3  py-2.5  rounded-r-3xl"
+                >
+                  <FaPlus />
+                </button>
+                <span className="px-3  pt-[6px] bg-white text-[20px] vazir-bold">
+                  {quantity}
+                </span>
+                <button
+                  ref={ButtonRef}
+                  onClick={() => setQuantity((prev) => prev - 1)}
+                  className="bg-blue px-3 py-2.5 rounded-l-3xl cursor-pointer"
+                >
+                  <FaMinus />
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Title title={title}/>
-      <Comments/>
+      <Title title={title} />
+      <Comments />
     </div>
   );
 }

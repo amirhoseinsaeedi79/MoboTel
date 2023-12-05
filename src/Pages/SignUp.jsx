@@ -15,17 +15,16 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
 
-    const AllTicket = 
-    {
-      id: 1,
-      title: "برگشت وجه ",
-      text: "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید ",
-      time: "1402/03/14",
-      anserAdmin:
-        "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
-      status: "بسته شده‌",
-      dataAnswer: "1402/03/15",
-    }
+  const AllTicket = {
+    id: 1,
+    title: "برگشت وجه ",
+    text: "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید ",
+    time: "1402/03/14",
+    anserAdmin:
+      "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
+    status: "بسته شده‌",
+    dataAnswer: "1402/03/15",
+  };
 
   function registerHandler(data) {
     const newUser = {
@@ -33,8 +32,9 @@ export default function SignUp() {
       email: data.email,
       password: data.password,
       phone: data.phone,
-      favourites:[],
-      tickets:[AllTicket]
+      favourites: [],
+      cart: [],
+      tickets: [AllTicket],
     };
 
     if (data.password !== data.reapetPassword) {
@@ -50,8 +50,8 @@ export default function SignUp() {
       });
     } else {
       PostUser(newUser).then((res) => context.login(res.data));
-     
       reset();
+      context.login(newUser)
       toast.success("ثبت نام با موفقیت انجام شد", {
         position: "top-center",
         autoClose: 1500,

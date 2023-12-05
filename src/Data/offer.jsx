@@ -10,6 +10,8 @@ const allOffers = [
     image1: "power1.jpg",
     image2: "power2.jpg",
     Discount: 50,
+    q:1,
+    color:"سفید"
   },
   {
     id: 20,
@@ -22,6 +24,8 @@ const allOffers = [
     image1: "airpod1.jpg",
     image2: "airpod2.jpg",
     Discount: 40,
+    q:1,
+    color:"سفید"
   },
   {
     id: 30,
@@ -34,6 +38,8 @@ const allOffers = [
     image1: "charger1.jpg",
     image2: "charger2.jpg",
     Discount: 35,
+    q:1,
+    color:"سفید"
   },
   {
     id: 40,
@@ -46,6 +52,8 @@ const allOffers = [
     image1: "cover1.jpg",
     image2: "cover2.jpg",
     Discount: 40,
+    q:1,
+    color:"سفید"
   },
   {
     id: 50,
@@ -58,6 +66,8 @@ const allOffers = [
     image1: "headphon1.jpg",
     image2: "headphon2.jpg",
     Discount: 60,
+    q:1,
+    color:"سفید"
   },
   {
     id: 60,
@@ -70,6 +80,8 @@ const allOffers = [
     image1: "power1.jpg",
     image2: "power2.jpg",
     Discount: 50,
+    q:1,
+    color:"سفید"
   },
 ];
 

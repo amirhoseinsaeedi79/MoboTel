@@ -7,7 +7,7 @@ export default function LoveProducts() {
     const dataAt_localStorage = JSON.parse(localStorage.getItem("Favorate"));
     dataAt_localStorage.reverse();
     setFavorate(dataAt_localStorage);
-  }, []);
+  },[]);
 
   const removeItem = (item) => {
     const dataAt_localStorage = JSON.parse(localStorage.getItem("Favorate"));
