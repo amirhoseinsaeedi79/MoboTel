@@ -20,11 +20,6 @@ export default function Navbar() {
   const [allCart, setAllCart] = useState([]);
   const [numberCart, setNumberCart] = useState(0);
   const Menu = useRef();
-  useEffect(() => {
-    const dataAt_localStorage = JSON.parse(localStorage.getItem("Cart"));
-    dataAt_localStorage.reverse();
-    setAllCart(dataAt_localStorage);
-  });
 
   useEffect(() => {
     let handler = (e) => {
@@ -66,7 +61,7 @@ export default function Navbar() {
     }
     const resultOffer = total_Number;
     setNumberCart(resultOffer);
-  }, [allCart]);
+  },[allCart]);
 
   const exitMenu = () => {
     setStatusMenu(!statusMenu);
@@ -84,13 +79,14 @@ export default function Navbar() {
         <div className="z-10 w-full flex flex-row justify-between  bg-white py-2 px-2 md:px-5 fixed top-0  lg:relative shadow-lg lg:shadow-none pb-2 lg:pb-0">
           {/* ================================================ topbar-right */}
           <div className="topbar-right flex-row-center py-2">
-            <IoMenu onClick={openMenu} className="w-9 h-9 ml-3 lg:hidden " />
+            <IoMenu onClick={openMenu} className="w-8 h-8 ml-3 lg:hidden " />
             <Link to="/">
               <img
-                src="/public/images/logo.jpg"
+                src="images/logo.jpg"
                 alt="logo"
-                className="w-[120px] h-[45px]   md:w-[140px] md:h-[50px] lg:hidden"
+                className="w-[90px] h-[40px]  md:w-[140px] md:h-[55px] lg:hidden"
               />
+               
             </Link>
             <div className="relative  mr-5 lg:mr-0 hidden lg:flex">
               <button className="flex absolute inset-y-0 left-2 items-center pl-3 ">
@@ -119,17 +115,17 @@ export default function Navbar() {
               ref={userButtom}
               className="flex-row-center p-2 md:p-[10px] ml-3 cursor-pointer bg-white border-[2px] hover:border-blue  rounded-3xl shadow-md  border-gray-200"
             >
-              <FaCircleUser className="w-[20px] h-[20px] md:w-[28px] md:h-[28px] text-blue" />
-              <div className="mr-3 hidden  lg:flex">{context.showUsername}</div>
+              <FaCircleUser className={`w-[22px] h-[22px] md:w-[28px] md:h-[28px] ${context.isLogin ? ("text-green-500") : ("text-blue")}`} />
+              <div className="mr-2 hidden  lg:flex">{context.showUsername}</div>
             </div>
             <Link
               to="/Cart"
-              className={`flex-row-center items-center p-2  md:p-[10px] cursor-pointer bg-gray-300 lg:bg-white   hover:border-blue rounded-3xl shadow-md border-[2px] ${numberCart >=1 ? ("border-green-500") : ("border-gray-300")}`}
+              className={`flex-row-center items-center p-2  md:p-[10px] cursor-pointer bg-gray-300 lg:bg-white   hover:border-blue rounded-3xl shadow-md border-[2px] ${context.numberNavbar >=1 && context.isLogin ? ("border-green-500") : ("border-gray-300")}`}
             >
-              <FaBasketShopping className={`w-[22px] h-[22px] md:w-[30px] md:h-[30px] ml-2 ${numberCart >=1 ? ("text-green-500") : ("text-blue")}`} />
+              <FaBasketShopping className={`w-[22px] h-[22px] md:w-[30px] md:h-[30px] ml-2 ${context.numberNavbar >=1 && context.isLogin ? ("text-green-500") : ("text-blue")}`} />
               <span className="mx-3 hidden lg:flex">سبد خرید</span>
-              <span className="px-2  lg:px-2  text-[16px]  lg:text-[16px] pt-[2px] rounded-full bg-blue text-white shadow-xl ">
-                {numberCart}
+              <span className={`px-2  lg:px-2  text-[16px]  lg:text-[16px] pt-[2px] rounded-full ${context.numberNavbar >=1 && context.isLogin ? ("bg-green-500") : ("bg-blue")}  shadow-xl `}>
+                {context.isLogin==true?(context.numberNavbar):0}
               </span>
             </Link>
           </div>
@@ -154,9 +150,9 @@ export default function Navbar() {
           <div className="flex-col-center pt-5">
             <Link to="/">
               <img
-                src="src/assets/images/logo.jpg"
+                src="images/logo.jpg"
                 alt="logo"
-                className="w-[135px] h-[60px]"
+                className="w-[140px] h-[55px]"
               />
             </Link>
             <div className="relative mt-3 ">
@@ -186,34 +182,34 @@ export default function Navbar() {
               to="/"
               className="w-full flex-row-center py-2 bg-body mb-3  hover:bg-blue hover:text-white hover:border-b-blue"
             >
-              <span className="mr-1.5 text-[17px] ">صفحه اصلی </span>
+              <span className="mr-1.5 text-[16px] ">صفحه اصلی </span>
             </Link>
             <Link
               onClick={exitMenu}
               to="/Products"
               className="w-full flex-row-center py-2 mb-3 bg-body  hover:bg-blue hover:text-white hover:border-b-blue"
             >
-              <span className="mr-1.5 text-[17px] ">دسته بندی محصولات</span>
+              <span className="mr-1.5 text-[16px] ">دسته بندی محصولات</span>
             </Link>
             <Link
               onClick={exitMenu}
               to="/Offers"
               className="w-full flex-row-center py-2 mb-3  bg-body hover:bg-blue hover:text-white  hover:border-b-blue"
             >
-              <span className="mr-1.5 text-[17px] ">تخفیف و پیشنهاد ها</span>
+              <span className="mr-1.5 text-[16px] ">تخفیف و پیشنهاد ها</span>
             </Link>
             <Link
               onClick={exitMenu}
               to="/Questions"
               className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue"
             >
-              <span className="mr-1.5 text-[17px] ">سوالات متداول</span>
+              <span className="mr-1.5 text-[16px] ">سوالات متداول</span>
             </Link>
             <div
               onClick={exitMenu}
               className="w-full flex-row-center py-2 mb-3  bg-body  hover:bg-blue hover:text-white hover:border-b-blue"
             >
-              <span className="mr-1.5 text-[17px] ">حساب کاربری</span>
+              <span className="mr-1.5 text-[16px] ">حساب کاربری</span>
             </div>
           </div>
         </div>
@@ -237,7 +233,7 @@ export default function Navbar() {
           </Link>
           <Link to="/">
             <img
-              src="/public/images/logo.jpg"
+              src="images/logo.jpg"
               alt="logo"
               className="w-[140px] h-[55px] mr-7 ml-7"
             />

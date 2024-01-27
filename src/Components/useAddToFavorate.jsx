@@ -1,11 +1,12 @@
 import { toast } from "react-toastify";
 
-export default function useAddToFavorate(item, context) {
 
+
+export default function useAddToFavorate(item, contexts,context) {
 
   const AddFavorate = () => {
     const dataLocalStorage = localStorage.getItem("Favorate");
-    if (context == false) {
+    if (contexts == false) {
       toast.error("لطفا ابتدا وارد حساب خود شوید", {
         position: "top-center",
         autoClose: 1200,
@@ -17,8 +18,10 @@ export default function useAddToFavorate(item, context) {
         theme: "colored",
       });
     }
-    if (dataLocalStorage == null && context == true) {
+    if (dataLocalStorage == null && contexts == true) {
       localStorage.setItem("Favorate", JSON.stringify([item]));
+      const listFavorate = JSON.parse(localStorage.getItem("Favorate"));
+      context(listFavorate);
       toast.success("به علاقه مندی ها اضافه شد", {
         position: "top-center",
         autoClose: 1200,
@@ -30,15 +33,17 @@ export default function useAddToFavorate(item, context) {
         theme: "colored",
       });
     } else {
-      const allData_LocalStorage = JSON.parse(localStorage.getItem("Favorate"));  
+      const allData_LocalStorage = JSON.parse(localStorage.getItem("Favorate"));
       const result = allData_LocalStorage.some((items) => {
         return items.name == item.name;
       });
-      if (result && context == true) {
+      if (result && contexts == true) {
         const items_filter = allData_LocalStorage.filter((items) => {
           return items.name !== item.name;
         });
         localStorage.setItem("Favorate", JSON.stringify(items_filter));
+        const listFavorate = JSON.parse(localStorage.getItem("Favorate"));
+        context(listFavorate);
         toast.error("از علاقه مندی ها حذف شد", {
           position: "top-center",
           autoClose: 1200,
@@ -49,9 +54,11 @@ export default function useAddToFavorate(item, context) {
           progress: undefined,
           theme: "colored",
         });
-      } else if (!result && context == true) {
+      } else if (!result && contexts == true) {
         allData_LocalStorage.push(item);
         localStorage.setItem("Favorate", JSON.stringify(allData_LocalStorage));
+        const listFavorate = JSON.parse(localStorage.getItem("Favorate"));
+        context(listFavorate);
         toast.success("به علاقه مندی ها اضافه شد", {
           position: "top-center",
           autoClose: 1200,
@@ -64,6 +71,8 @@ export default function useAddToFavorate(item, context) {
         });
       }
     }
+
   };
   return AddFavorate();
+  
 }

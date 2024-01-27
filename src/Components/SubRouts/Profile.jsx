@@ -13,7 +13,7 @@ export default function Profile() {
       <div className="w-full flex flex-col text-[16px] md:text-[18px]  vazir-bold">
         <h4> اطلاعات کاربری</h4>
         <div className="bg-gray-200 mt-4">
-          <div className="w-[12%] h-[3px] bg-blue "></div>
+          <div className="w-[40%] md:w-[15%] h-[3px] bg-blue "></div>
         </div>
       </div>
       {/* ================================================================ Info  */}

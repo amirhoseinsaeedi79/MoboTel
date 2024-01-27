@@ -12,7 +12,6 @@ export default function AddTicketModal() {
   const {
     register,
     handleSubmit,
-    // reset,
     formState: { errors },
   } = useForm();
 
@@ -21,38 +20,44 @@ export default function AddTicketModal() {
   }
   async function getAll_users() {
     const userInfo = JSON.parse(localStorage.getItem("User"));
+    setInfoUser(userInfo.username);
     await axios
-      .get(`http://localhost:3000/user?id=${userInfo.id}`)
-      .then((res) => setInfoUser(res.data[0]));
+      .get(`https://mobo-server.liara.run/user?id=${userInfo.id}`)
+      .then((res) => setAllUsers(res.data[0]));
   }
 
   useEffect(() => {
     getAll_users();
-  },[]);
+  }, []);
 
   async function registerHandler(data) {
-
     await getAll_users();
 
-    const oldTiket = infoUser.tickets;
-
+    const oldTiket = allUsers.tickets;
+    console.log(infoUser);
     const dataTicket = {
       title: data.title,
       text: data.text,
+      time: "1402/03/14",
       status: "درحال بررسی",
+      username: infoUser,
     };
+
+    axios
+      .post("https://mobo-server.liara.run/ticket", dataTicket)
+      .then((res) => console.log(res.data));
 
     await oldTiket.push(dataTicket);
 
-
     const editUser = { tickets: oldTiket };
 
-    await  PatchUser(editUser, infoUser.id).then((res) => console.log(res.data));
+    await PatchUser(editUser, allUsers.id).then((res) => res.data);
 
-    const AddToList_Ticket = oldTiket.reverse()
-    context.getNew_AllTicket(AddToList_Ticket)
+    const AddToList_Ticket = oldTiket.reverse();
 
-      exitHandler()
+    context.getNew_AllTicket(AddToList_Ticket);
+
+    exitHandler();
   }
 
   return ReactDOM.createPortal(

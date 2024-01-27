@@ -146,12 +146,12 @@ export default function ShowProduct() {
           <div className="bg-body py-5 mt-5 px-5 flex-col-center lg:flex-row-center rounded-xl border-[2px] shadow-xl">
             <div className="w-full flex-row-center lg:flex lg:flex-row lg:justify-start text-[16px] lg:text-[19px] mb-5 lg:mb-0">
               <del className="text-gray-400 pl-2 border-l-2 border-gray-400 ">
-                {info.price + (info.price * info.Discount) / 100} تومان
+                {info.price !==undefined ? ((info.price + (info.price * info.Discount) / 100).toLocaleString("fa-money")):info.price} تومان
               </del>
-              <span className="px-2 text-blue ">{info.price} تومان</span>
+              <span className="px-2 text-blue ">{info.price !== undefined ? (info.price.toLocaleString("fa-money")) :info.price } تومان</span>
             </div>
             <div className="flex-row-center">
-              <div onClick={() => useAddToCart(infoProduct, context.isLogin)}>
+              <div onClick={() => useAddToCart(infoProduct, context)}>
                 <button className="bg-blue text-white w-[120px] py-2 rounded-xl text-[17px]">
                   سفارش محصول
                 </button>
@@ -164,7 +164,7 @@ export default function ShowProduct() {
                   <FaPlus />
                 </button>
                 <span className="px-3  pt-[6px] bg-white text-[20px] vazir-bold">
-                  {quantity}
+                  {quantity.toLocaleString("fa-money")}
                 </span>
                 <button
                   ref={ButtonRef}
@@ -178,7 +178,18 @@ export default function ShowProduct() {
           </div>
         </div>
       </div>
-      <Title title={title} />
+      <div className="flex flex-row justify-between items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl my-2 mb-7 text-[12px] md:text-[16px] vazir-bold">
+        <div className="flex-row-center ">
+          <img
+            src="images/item.png"
+            alt=""
+            className="w-[20px] h-[20px] md:w-[32px] md:h-[32px]"
+          />
+          <span className="mr-3">
+            نظرات <span className="text-blue">کاربران</span>
+          </span>
+        </div>
+      </div>
       <Comments />
     </div>
   );

@@ -23,7 +23,7 @@ export default function Catgory() {
   };
   async function sortHandler(ctg) {
     await axios
-      .get(`http://localhost:3000/product?ctg=${ctg}`)
+      .get(`https://mobo-server.liara.run/product?ctg=${ctg}`)
       .then((res) => context.newProduct(res.data));
 
     navigate("/Products");
@@ -37,7 +37,6 @@ export default function Catgory() {
             spaceBetween={20}
             slidesPerView={4}
             centeredSlides={true}
-            // navigation={true}
             loop={true}
             autoplay={{
               delay: 1800,
@@ -78,9 +77,9 @@ export default function Catgory() {
                   <img
                     src={item.src}
                     alt=""
-                    className="rounded-full h-[133px] w-[133px] mb-3"
+                    className="rounded-full w-[110px] h-[110px] md:h-[110px]  md:w-[110px] mb-3"
                   />
-                  <span className="pr-11 text-[20px] vazir-bold ">
+                  <span className="pr-[34px] md:pr-9 w-full text-center text-[16px] vazir-bold ">
                     {item.name}
                   </span>
                 </div>

@@ -1,4 +1,5 @@
 import { MdOutlineChevronLeft } from "react-icons/md";
+import { FaHeart } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { CiShoppingBasket } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,6 +17,7 @@ import { GetProduct } from "../Services/Axios/Requests/Products";
 import Loader from "../Components/Loader";
 import useAddToListFavorate from "../Components/useAddToFavorate.jsx";
 import useAddToCart from "../Components/useAddToCar";
+import useAddToFavorate from "../Components/useAddToFavorate.jsx";
 export default function Products() {
   const context = useContext(Context);
   const navigate = useNavigate();
@@ -26,6 +28,9 @@ export default function Products() {
   useEffect(() => {
     GetProduct().then((res) => setAllProducts(res.data));
   }, [search]);
+  useEffect(() => {
+    GetProduct().then((res) =>context.newProduct(res.data));
+  },[]);
 
   const InfoHandler = async (item) => {
     const localInfo = localStorage.setItem("info", JSON.stringify(item));
@@ -35,7 +40,7 @@ export default function Products() {
 
   async function sortHandler(ctg) {
     await axios
-      .get(`http://localhost:3000/product?ctg=${ctg}`)
+      .get(`https://mobo-server.liara.run/product?ctg=${ctg}`)
       .then((res) => context.newProduct(res.data));
     console.log(context.allProduct);
   }
@@ -67,15 +72,20 @@ export default function Products() {
     await context.newProduct(searchValue);
   }
 
+  function statusFavorate(item) {
+    const isin = (items) => items.name == item;
+    let status = context.favorate.some(isin);
+    return status;
+  }
+
   const title = {
     textWhite: "محصولات",
     textBlue: "فروشگاه",
-    more: "مشاهده همه محصولات",
   };
 
   return (
     <div className="w-full pt-[95px] md:pt-28 lg:pt-6 pb-2">
-      <div className="flex flex-row items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl mb-3  text-[12px] md:text-[17px] vazir-bold">
+      <div className="flex flex-row items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl mb-3  text-[14px] md:text-[17px] vazir-bold">
         <Link to="/">خانه</Link>
         <MdOutlineChevronLeft className="w-[15px] h-[15px] mx-2" />
         <span className="text-blue pb-[2px] cursor-pointer">محصولات</span>
@@ -126,9 +136,9 @@ export default function Products() {
                   <img
                     src={item.src}
                     alt=""
-                    className="rounded-full h-[133px] w-[133px] mb-3"
+                    className="rounded-full w-[110px] h-[110px] md:h-[133px]  md:w-[133px] mb-3"
                   />
-                  <span className="pl-2 text-[20px] vazir-bold ">
+                  <span className="  w-full text-center text-[16px] vazir-bold ">
                     {item.name}
                   </span>
                 </div>
@@ -137,55 +147,100 @@ export default function Products() {
           </Swiper>
         </div>
       </div>
-      <Title title={title} />
+      <div className="flex flex-row justify-between items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-3 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl my-2 mb-7 text-[14px] md:text-[16px] vazir-bold">
+        <div className="flex-row-center ">
+          <img
+            src="images/item.png"
+            alt=""
+            className="w-[20px] h-[20px] md:w-[32px] md:h-[32px]"
+          />
+          <span className="mr-3"> محصولات </span>
+          <span className="text-blue mr-2">فروشگاه </span>
+        </div>
+      </div>
       <div className="w-full flex flex-col-reverse md:flex-row-reverse justify-between  px-2.5 md:px-6  ">
         <div className="w-full md:w-[85%] xl:w-[90%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3 xl:gap-x-7">
           {context.allProduct.length !== 0 ? (
             context.allProduct.map((item) => (
               <SwiperSlide
                 key={item.id}
-                className="w-[100%] h-[360px] md:h-[320px] rounded-xl text-center bg-white flex flex-col py-4 px-2 mb-5 md:mb-4 shadow-lg"
+                className="w-[100%] h-[315px] md:h-[320px] rounded-xl text-center bg-white flex flex-col py-4 px-2 mb-5 md:mb-4 shadow-lg"
               >
                 <div className="flex flex-row justify-between items-center">
                   <div className="text-[17px] px-2 py-[3px] pt-1 rounded-lg text-red-600 bg-red-200 ">
                     <span>{item.Discount}٪ تخفیف</span>
                   </div>
                   <div className="flex-row-center">
-                    <FaRegHeart
-                      onClick={() =>
-                        useAddToListFavorate(item, context.isLogin)
-                      }
-                      className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer text-red-500"
-                    />
+                    {statusFavorate(item.name) == true ? (
+                      <FaHeart
+                        onClick={() =>
+                          useAddToFavorate(
+                            item,
+                            context.isLogin,
+                            context.updateFavorate
+                          )
+                        }
+                        className={`w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer text-red-500`}
+                      />
+                    ) : (
+                      <FaRegHeart
+                        onClick={() =>
+                          useAddToFavorate(
+                            item,
+                            context.isLogin,
+                            context.updateFavorate
+                          )
+                        }
+                        className={`w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer text-red-500`}
+                      />
+                    )}
                     <span
                       onClick={() => InfoHandler(item)}
-                      className=" px-[7px] py-1 text-[16px] rounded-xl bg-gray-200 cursor-pointer hover:text-blue"
+                      className=" px-[7px] py-1 text-[18px] rounded-xl bg-gray-200 cursor-pointer hover:text-blue"
                     >
                       نمایش
                     </span>
                   </div>
                 </div>
-                <div  onClick={() => InfoHandler(item)} className="flex-row-center cursor-pointer mt-3">
+                <div
+                  onClick={() => InfoHandler(item)}
+                  className="flex-row-center cursor-pointer mt-3"
+                >
                   <img
                     src={`images/${item.imgae}`}
                     alt=""
-                    className="w-[180px] h-[180px] md:w-[150px]  md:h-[145px] items-center"
+                    className="w-[140px] h-[140px] md:w-[150px]  md:h-[145px] items-center"
                   />
                 </div>
-                <div  onClick={() => InfoHandler(item)} className="flex-row-center cursor-pointer mt-4 lg:text-[17px] vazir-bold  ">
-                  <span className="h-[24px] overflow-hidden">{item.name}</span>
+                <div
+                  onClick={() => InfoHandler(item)}
+                  className="flex-row-center cursor-pointer mt-4 lg:text-[17px] vazir-bold  "
+                >
+                  <span className="h-[24px] overflow-hidden">
+                    {item.name.toLocaleString("fa-money")}
+                  </span>
                 </div>
                 <div className="flex flex-row-reverse items-center justify-between mt-3 ">
                   <div className="py-2">
-                    <button  onClick={() => useAddToCart(item, context.isLogin)}  className="flex-row-center text-white bg-blue rounded-xl px-2 py-1  hover:text-black">
+                    <button
+                      onClick={() => useAddToCart(item, context)}
+                      className="flex-row-center text-white bg-blue rounded-xl px-2 py-1  hover:text-black"
+                    >
                       <CiShoppingBasket className="w-[25px] h-[25px]" />
                       <span className="text-[16px]">سفارش</span>
                     </button>
                   </div>
                   <div className="flex-col-center text-[17px]">
-                    <span className="text-blue"> {item.price} تومان</span>
+                    <span className="text-blue">
+                      {" "}
+                      {item.price.toLocaleString("fa-money")} تومان
+                    </span>
                     <del className="text-red-500 min-w-[117px]">
-                      {item.price + (item.price * item.Discount) / 100} تومان
+                      {(
+                        item.price +
+                        (item.price * item.Discount) / 100
+                      ).toLocaleString("fa-money")}{" "}
+                      تومان
                     </del>
                   </div>
                 </div>
@@ -221,28 +276,7 @@ export default function Products() {
               />
             </div>
           </form>
-          <div className="px-3 pt-5 vazir-bold hidden md:flex flex-row md:flex-col ">
-            <span className="text-blue">نمایش بر اساس :</span>
-            <div>
-              <div className="mt-3 flex flex-row">
-                <span className="ml-2">تمام محصولات</span>
-                <input
-                  onClick={() => allSelectProducts()}
-                  type="radio"
-                  name="test"
-                />
-              </div>
-              <div className="mt-3 flex flex-row">
-                <span className="ml-2">ارزانترین</span>
-                <input onClick={() => inexpensive()} type="radio" name="test" />
-              </div>
-              <div className="mt-3 flex flex-row">
-                <span className="ml-2">گرانترین</span>
-                <input onClick={() => expensive()} type="radio" name="test" />
-              </div>
-            </div>
-          </div>
-          <div className="px-3 pt-3 vazir-bold hidden md:flex md:flex-col pb-5">
+          <div className="px-3 pt-3 vazir-bold hidden md:flex md:flex-col pb-2">
             <span className="text-blue">دسته بندی :</span>
             <div>
               <div className="mt-3 flex flex-row">
@@ -308,6 +342,28 @@ export default function Products() {
                   type="radio"
                   name="ctg"
                 />
+              </div>
+            </div>
+          </div>
+          <div className="px-3 vazir-bold hidden md:flex flex-row md:flex-col ">
+            <span className="text-blue">نمایش بر اساس :</span>
+            <div>
+              <div className="mt-3 flex flex-row">
+                <span className="ml-2">تمام محصولات</span>
+                <input
+                  onClick={() => allSelectProducts()}
+                  type="radio"
+                  name="test"
+                  defaultChecked="true"
+                />
+              </div>
+              <div className="mt-3 flex flex-row">
+                <span className="ml-2">ارزانترین</span>
+                <input onClick={() => inexpensive()} type="radio" name="test" />
+              </div>
+              <div className="mt-3 flex flex-row">
+                <span className="ml-2">گرانترین</span>
+                <input onClick={() => expensive()} type="radio" name="test" />
               </div>
             </div>
           </div>

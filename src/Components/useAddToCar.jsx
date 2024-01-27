@@ -1,10 +1,9 @@
 import { toast } from "react-toastify";
 
 export default function useAddToCart(item, context) {
-
   const AddCart = () => {
     const dataLocalStorage = localStorage.getItem("Cart");
-    if (context == false) {
+    if (context.isLogin == false) {
       toast.error("لطفا ابتدا وارد حساب خود شوید", {
         position: "top-center",
         autoClose: 1200,
@@ -17,7 +16,7 @@ export default function useAddToCart(item, context) {
       });
     }
 
-    if (dataLocalStorage == null && context == true) {
+    if (dataLocalStorage == null && context.isLogin == true) {
       localStorage.setItem("Cart", JSON.stringify([item]));
       toast.success("به سبد خرید اضافه شد", {
         position: "top-center",
@@ -34,7 +33,7 @@ export default function useAddToCart(item, context) {
       const result = allData_LocalStorage.some((items) => {
         return items.name == item.name;
       });
-      if (result && context == true) {
+      if (result && context.isLogin == true) {
         toast.error("این محصول در سبد خرید وجود دارد", {
           position: "top-center",
           autoClose: 1200,
@@ -45,7 +44,7 @@ export default function useAddToCart(item, context) {
           progress: undefined,
           theme: "colored",
         });
-      } else if (!result && context == true) {
+      } else if (!result && context.isLogin == true) {
         allData_LocalStorage.push(item);
         localStorage.setItem("Cart", JSON.stringify(allData_LocalStorage));
         toast.success("به سبد خرید اضافه شد", {
@@ -58,6 +57,14 @@ export default function useAddToCart(item, context) {
           progress: undefined,
           theme: "colored",
         });
+
+        let total_Number = 0;
+        for (let obj of allData_LocalStorage) {
+          total_Number += obj.q;
+        }
+        const resultOffer = total_Number;
+
+        context.changeNumber_Navbar(resultOffer);
       }
     }
   };

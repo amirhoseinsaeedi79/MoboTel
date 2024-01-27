@@ -6,11 +6,15 @@
   font-family: "Vazir";
   src: url("../public/fonts/Vazir.woff") format("woff");
 }
+@font-face {
+  font-family: "Vazir-num";
+  src: url("../public/fonts/Vazir-Light-FD.woff") format("woff");
+}
 @layer utilities {
   body {
     direction: rtl;
-    background-color: c;
     font-family: "Vazir";
+    font-family: "Vazir-num";
   }
   .flex-row-center {
     display: flex;
@@ -52,7 +56,9 @@
       RGBA(96, 165, 250)
     );
   }
-
+  textarea{
+    resize: none;
+  }
   .navlinks a.active {
     background-color: #068fff;
   }
@@ -151,7 +157,7 @@
   }
   .paralexHome {
     width: 100%;
-    height: 400px;
+    height: 350px;
     background-image: url(../public/images/paralex.webp);
     background-attachment: fixed;
     background-size: cover;
@@ -162,7 +168,7 @@
   }
   .paralexHome2 {
     width: 100%;
-    height: 400px;
+    height: 350px;
     background-image: url(../public/images/paralex-home.jpg);
     background-attachment: fixed;
     background-size: cover;

@@ -9,7 +9,7 @@ export default function GotoUp() {
       setButton("bottom-9 right-5");
       setStatus(true);
     } else if (status && window.pageYOffset <= 600) {
-      setButton("bottom-[1750px] right-1");
+      setButton("bottom-[2000px] right-1");
       setStatus(false);
     }
   }
@@ -19,13 +19,13 @@ export default function GotoUp() {
   return (
     <div
       onClick={scrollTop}
-      className={`bg-blue w-14 h-14 flex-col-center transition-all duration-[1200ms] ease-in-out  rounded-full cursor-pointer fixed ${button} z-10`}
+      className={`bg-blue w-12 h-12 flex-col-center transition-all duration-[1200ms] ease-in-out  rounded-full cursor-pointer fixed ${button} z-10`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="w-12 h-12"
+        className="w-11 h-11"
       >
         <path
           fillRule="evenodd"

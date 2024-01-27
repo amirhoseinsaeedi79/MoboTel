@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import Context from "../../Context/context";
 export default function LoveProducts() {
   const [favorate, setFavorate] = useState([]);
+  const context = useContext(Context);
 
   useEffect(() => {
     const dataAt_localStorage = JSON.parse(localStorage.getItem("Favorate"));
-    dataAt_localStorage.reverse();
-    setFavorate(dataAt_localStorage);
+    if (dataAt_localStorage!=null) {
+      dataAt_localStorage.reverse();
+      setFavorate(dataAt_localStorage);
+    }
+
   },[]);
 
   const removeItem = (item) => {
@@ -17,6 +22,8 @@ export default function LoveProducts() {
     });
     localStorage.setItem("Favorate", JSON.stringify(items_filter));
     setFavorate(items_filter);
+    const listFavorate = JSON.parse(localStorage.getItem("Favorate"));
+    context.updateFavorate(listFavorate);
     toast.error("از علاقه مندی ها حذف شد", {
       position: "top-center",
       autoClose: 1200,
@@ -34,7 +41,7 @@ export default function LoveProducts() {
       <div className="w-full flex flex-col text-[16px] md:text-[18px]  vazir-bold">
         <h4>محصولات مورد پسند</h4>
         <div className="bg-gray-200 mt-4">
-          <div className="w-[13%] h-[3px] bg-blue "></div>
+          <div className="w-[50%] md:w-[25%] xl:w-[15%] h-[3px] bg-blue "></div>
         </div>
       </div>
       {/* =============================================================== Table Love Products // start */}

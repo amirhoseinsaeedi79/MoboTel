@@ -7,22 +7,22 @@ export default function Footer() {
   return (
     <>
       <footer className="bg-white px-2.5 md:px-7 pt-3 flex  items-center flex-wrap flex-row justify-between py-5">
-        <div className=" ">
-          <h3 className="vazir-bold text-[17px] md:text-[20px] text-blue">
+        <div className="">
+          <h3 className="vazir-bold text-[16px] md:text-[18px] text-blue">
             دسترسی سریع
           </h3>
           <div className="flex flex-col text-[15px]">
-            <span className="mt-3 hover:text-blue">صفحه اصلی</span>
-            <span className="mt-3 hover:text-blue pl-1">
+            <Link to="/" className="mt-3 hover:text-blue">صفحه اصلی</Link>
+            <Link to="/Offers" className="mt-3 hover:text-blue pl-1">
               تخفیف ها و پیشنهاد ها
-            </span>
-            <span className="mt-3 hover:text-blue">دسته بندی محصولات</span>
-            <span className="mt-3 hover:text-blue">سوالات متداول</span>
-            <span className="mt-3 hover:text-blue">حساب کاربری</span>
+            </Link>
+            <Link to="/Products" className="mt-3 hover:text-blue">دسته بندی محصولات</Link>
+            <Link to="/Questions" className="mt-3 hover:text-blue">سوالات متداول</Link>
+            <Link className="mt-3 hover:text-blue">حساب کاربری</Link>
           </div>
         </div>
         <div className=" ">
-          <h3 className="vazir-bold text-[17px] md:text-[20px] text-blue">
+          <h3 className="vazir-bold text-[16px] md:text-[18px] text-blue">
             برند برتر محصولات
           </h3>
           <div className="flex flex-col text-[15px]">
@@ -34,28 +34,28 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 md:mt-0 ">
-          <h3 className="vazir-bold text-[17px] md:text-[20px]  text-blue">
+        <div className="mt-6 md:mt-1.5 ">
+          <h3 className="vazir-bold text-[16px] md:text-[18px]  text-blue">
             ارتباط با ما
           </h3>
           <div className="flex flex-col items-start ">
-            <div className="flex-row-center mt-6">
+            <div className="flex-row-center mt-3">
               <FaLocationDot className="w-[18px] text-blue h-[18px] ml-2" />
               <span>تهران - ولیعصر خیابان مهر پلاک 12</span>
             </div>
-            <div className="flex-row-center mt-4">
+            <div className="flex-row-center mt-3">
               <FaPhone className="w-[18px] text-blue h-[18px] ml-2" />
               <span>021-37564018</span>
             </div>
-            <div className="flex-row-center mt-4">
+            <div className="flex-row-center mt-3">
               <FaPhone className="w-[18px] text-blue h-[18px] ml-2" />
               <span>09123456789</span>
             </div>
-            <div className="flex-row-center mt-4">
+            <div className="flex-row-center mt-3">
               <MdEmail className="w-[18px] text-blue h-[18px] ml-2" />
               <span>mobotel@gmail.com</span>
             </div>
-            <div className="flex-row-center mt-4">
+            <div className="flex-row-center mt-3">
               <MdEmail className="w-[18px] text-blue h-[18px] ml-2" />
               <span>mobotel-city@gmail.com</span>
             </div>

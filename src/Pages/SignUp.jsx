@@ -33,8 +33,9 @@ export default function SignUp() {
       password: data.password,
       phone: data.phone,
       favourites: [],
-      cart: [],
+      comment: [],
       tickets: [AllTicket],
+      
     };
 
     if (data.password !== data.reapetPassword) {

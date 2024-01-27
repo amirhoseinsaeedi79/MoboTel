@@ -26,97 +26,20 @@
           "anserAdmin": "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
           "status": "بسته شده‌",
           "dataAnswer": "1402/03/15"
-        },
-        {
-          "title": "aaaaaa",
-          "text": "aaaaaaaaaaaa",
-          "status": "درحال بررسی"
         }
       ],
-      "id": 2
-    },
-    {
-      "username": "amir2898",
-      "email": "amir@gmail.com",
-      "password": "amir2898",
-      "phone": "09198642898",
-      "favourites": [],
-      "cart": [],
-      "tickets": [
-        {
-          "id": 1,
-          "title": "برگشت وجه ",
-          "text": "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید ",
-          "time": "1402/03/14",
-          "anserAdmin": "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
-          "status": "بسته شده‌",
-          "dataAnswer": "1402/03/15"
-        }
-      ],
-      "id": 3
-    },
-    {
-      "username": "sara1254",
-      "email": "maryam@gmail.com",
-      "password": "amir2898",
-      "phone": "09198642898",
-      "favourites": [],
-      "cart": [],
-      "tickets": [
-        {
-          "id": 1,
-          "title": "برگشت وجه ",
-          "text": "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید ",
-          "time": "1402/03/14",
-          "anserAdmin": "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
-          "status": "بسته شده‌",
-          "dataAnswer": "1402/03/15"
-        }
-      ],
-      "id": 4
-    },
-    {
-      "username": "sssssss",
-      "email": "ali@gmail.com",
-      "password": "ssssssssss",
-      "phone": "09123456789",
-      "favourites": [],
-      "cart": [],
-      "tickets": [
-        {
-          "id": 1,
-          "title": "برگشت وجه ",
-          "text": "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید ",
-          "time": "1402/03/14",
-          "anserAdmin": "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
-          "status": "بسته شده‌",
-          "dataAnswer": "1402/03/15"
-        }
-      ],
-      "id": 5
-    },
-    {
-      "username": "09163998840",
-      "email": "niloofar@gmail.com",
-      "password": "aaaaaaaaaa",
-      "phone": "091562256566",
-      "favourites": [],
-      "cart": [],
-      "tickets": [
-        {
-          "id": 1,
-          "title": "برگشت وجه ",
-          "text": "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید ",
-          "time": "1402/03/14",
-          "anserAdmin": "سلام وقت شماهم بخیر بله حتما لطفا شماره کارت خودتون رو بفرستید تادر اسرع وقت براتون واریز بشه",
-          "status": "بسته شده‌",
-          "dataAnswer": "1402/03/15"
-        }
-      ],
-      "id": 6
+      "id": 3,
+      "fullname": "امیرحسین سعیدی",
+      "address": "تهران / اختیاریه جنوبی پلاک 15"
     }
   ],
-  "comment": [],
+  "comment": [
+    {
+      "username": "amir289800",
+      "text": "ssssssssssssssssssss",
+      "id": 1
+    }
+  ],
   "admins": [
     {
       "username": "amirhosein12345",
@@ -127,7 +50,178 @@
       "id": 1
     }
   ],
-  "ticket": [],
+  "ticket": [
+    {
+      "title": "rrrrrrrrrrrr",
+      "text": "rrrrrrrrrrrrr",
+      "username": "amir2898",
+      "id": 1
+    },
+    {
+      "title": "برگشت وجه ",
+      "text": "سلام وقت بخیر برای برگشت وجه فاکتور شماره 12545 مزاحم شدم ممنون میشم مبلغ رو به حسابم برگردونید\n\n",
+      "username": "amir2898",
+      "id": 2
+    },
+    {
+      "title": "jsjs",
+      "text": "ssssssssssssssssssssss",
+      "username": "AmirHosein2898",
+      "id": 3
+    },
+    {
+      "title": "cccccccccccccccc",
+      "text": "ccccccccccccccccccc",
+      "time": "1402/03/14",
+      "username": "AmirHosein2898",
+      "id": 4
+    },
+    {
+      "title": "sssssssssss",
+      "text": "ssssssssssssssss",
+      "time": "1402/03/14",
+      "username": "AmirHosein2898",
+      "id": 5
+    },
+    {
+      "title": "مشکل پرداخت ",
+      "text": "کمممممممممممممممممممممککککککککککککککککککک",
+      "time": "1402/03/14",
+      "username": "niloofar",
+      "status": "درحال بررسی",
+      "id": 6
+    },
+    {
+      "title": "سسسسسسسسسسسسسسسس",
+      "text": "سسسسسسسسسسسسسسسسسسسسس",
+      "time": "1402/03/14",
+      "username": "niloofar",
+      "status": "درحال بررسی",
+      "id": 7
+    },
+    {
+      "title": "mmmmmmmmmm",
+      "text": "kkm",
+      "time": "1402/03/14",
+      "username": "amir2898",
+      "status": "درحال بررسی",
+      "id": 8
+    },
+    {
+      "title": "تست",
+      "text": "تستسسایانیلسیسششیسی",
+      "time": "1402/03/14",
+      "username": "amir2898",
+      "status": "درحال بررسی",
+      "id": 9
+    },
+    {
+      "title": "aaaaaaa",
+      "text": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "time": "1402/03/14",
+      "username": "amir2898",
+      "status": "درحال بررسی",
+      "id": 10
+    },
+    {
+      "title": "test",
+      "text": "this is test",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 11
+    },
+    {
+      "title": "testssss",
+      "text": "sssssssssssssss",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 12
+    },
+    {
+      "title": "ccccccccc",
+      "text": "cccccccccccccccc",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 13
+    },
+    {
+      "title": "ccc",
+      "text": "cccccccccccccccccc",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 14
+    },
+    {
+      "title": "ddddddddd",
+      "text": "ddddddddddddddddddddddddddddddd",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 15
+    },
+    {
+      "title": "ddddddddd",
+      "text": "ddddddddddddddddddddddddddddddd",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 16
+    },
+    {
+      "title": "ddddddddd",
+      "text": "ddddddddddddddddddddddddddddddd",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 17
+    },
+    {
+      "title": "ddddddddd",
+      "text": "ddddddddddddddddddddddddddddddd",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 18
+    },
+    {
+      "title": "sssssssssss",
+      "text": "ssssssssssssssss",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 19
+    },
+    {
+      "title": "dddddddd",
+      "text": "dddddddddddddddddd",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 20
+    },
+    {
+      "title": "فففففففففففففف",
+      "text": "ففففففففففففففففففففف",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 21
+    },
+    {
+      "title": "vvvvvvvvvv",
+      "text": "vvvvvvvvvvvvv",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 22
+    },
+    {
+      "title": "44444444444",
+      "text": "4444444444444444444",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 23
+    },
+    {
+      "title": "sss",
+      "text": "ssssssssss",
+      "time": "1402/03/14",
+      "status": "درحال بررسی",
+      "id": 24
+    }
+  ],
   "cart": [],
   "product": [
     {
@@ -287,7 +381,7 @@
     },
     {
       "id": 14,
-      "name": "آداپوتر شارژر مدل 22 آنکر",
+      "name": "آداپتور شارژر مدل 22 آنکر",
       "ctg": "شارژر",
       "price": 1200000,
       "Discount": 40,
@@ -815,7 +909,7 @@
       "price": 1250000,
       "Discount": 10,
       "quantity": "500",
-      "imgae": "power (6).webp",
+      "imgae": "power (16).webp",
       "image1": "power1.jpg",
       "image2": "power2.jpg",
       "q": 1,
@@ -828,7 +922,7 @@
       "price": 700000,
       "Discount": 30,
       "quantity": "500",
-      "imgae": "power (7).webp",
+      "imgae": "power (14).webp",
       "image1": "power1.jpg",
       "image2": "power2.jpg",
       "q": 1,
@@ -854,7 +948,7 @@
       "price": 800000,
       "Discount": 60,
       "quantity": "500",
-      "imgae": "power (9).webp",
+      "imgae": "power (15).webp",
       "statusPrice": "expensive",
       "image1": "power1.jpg",
       "image2": "power2.jpg",
@@ -896,7 +990,7 @@
       "price": 2000000,
       "Discount": 60,
       "quantity": "500",
-      "imgae": "power (12).webp",
+      "imgae": "power (13).webp",
       "statusPrice": "expensive",
       "image1": "power1.jpg",
       "image2": "power2.jpg",
@@ -979,19 +1073,6 @@
       "quantity": "500",
       "imgae": "watch (6).webp",
       "statusPrice": "expensive",
-      "image1": "watch1.jpg",
-      "image2": "watch2.jpg",
-      "q": 1,
-      "color": "سفید"
-    },
-    {
-      "id": 97,
-      "name": "ساعت هوشمند سامسونگ مدل 986 ",
-      "ctg": "ساعت",
-      "price": 2700000,
-      "Discount": 40,
-      "quantity": "500",
-      "imgae": "watch (7).webp",
       "image1": "watch1.jpg",
       "image2": "watch2.jpg",
       "q": 1,

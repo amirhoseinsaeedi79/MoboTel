@@ -5,10 +5,13 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
 
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import Context from "../Context/context";
 
 export default function Cart() {
+  const context = useContext(Context);
+  const navigate = useNavigate()
   const [allCart, setAllCart] = useState([]);
   const [totalPriceCart, setTotalPriceCart] = useState(0);
   const [totalOffer, setTotalOffer] = useState(0);
@@ -16,16 +19,18 @@ export default function Cart() {
 
   const dataAt_localStorage = JSON.parse(localStorage.getItem("Cart"));
   useEffect(() => {
-    dataAt_localStorage.reverse();
-    setAllCart(dataAt_localStorage);
-  }, []);
+    if (dataAt_localStorage!=null) {
+      dataAt_localStorage.reverse();
+      setAllCart(dataAt_localStorage);
+    }
+  },[]);
 
   useEffect(() => {
     let totalPrice = 0;
     for (let obj of allCart) {
       totalPrice += obj.price * obj.q;
     }
-    const result = totalPrice; //item.price + (item.price * item.Discount) / 100
+    const result = totalPrice; 
     setTotalPriceCart(result);
   }, [allCart]);
 
@@ -56,8 +61,9 @@ export default function Cart() {
       filteredProducts[0];
     localStorage.setItem("Cart", JSON.stringify(dataAt_localStorages));
     setAllCart(dataAt_localStorages.reverse());
+    context.editnumberNavbar(numberCart+1);
   };
-  const minQuantity = (item) => {
+  const minQuantity = (item,num) => {
     const dataAt_localStorages = JSON.parse(localStorage.getItem("Cart"));
     const filteredProducts = dataAt_localStorages.filter(
       (product) => product.id === item.id
@@ -67,6 +73,10 @@ export default function Cart() {
       filteredProducts[0];
     localStorage.setItem("Cart", JSON.stringify(dataAt_localStorages));
     setAllCart(dataAt_localStorages.reverse());
+    context.editnumberNavbar(numberCart-1);
+    if (num==0) {
+      removeHandler()
+    }
   };
   const removeHandler = (item) => {
     const dataAt_localStorages = JSON.parse(localStorage.getItem("Cart"));
@@ -75,17 +85,18 @@ export default function Cart() {
     );
     localStorage.setItem("Cart", JSON.stringify(filteredProducts));
     setAllCart(filteredProducts.reverse());
+    context.editnumberNavbar(numberCart-1);
   };
 
   return (
     <div className="w-full pt-[95px] md:pt-28 lg:pt-6 pb-2">
-      <div className="flex flex-row items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl mb-3  text-[14px] md:text-[17px] vazir-bold">
+      <div className="flex flex-row items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl mb-8  text-[14px] md:text-[17px] vazir-bold">
         <Link to="/">خانه</Link>
         <MdOutlineChevronLeft className="w-[15px] h-[15px] mx-2" />
         <span className="text-blue pb-[2px] cursor-pointer">سبدخرید</span>
       </div>
 
-      {allCart.length >= 1 ? (
+      {allCart.length >= 1 && context.isLogin==true ? (
         <>
           <div className="py-2 px-2 md:py-5 mt-7 md:px-3 mx-2 md:mx-3 hidden md:block text-[16px] vazir-bold ">
             <div className="line-step-container">
@@ -140,11 +151,11 @@ export default function Cart() {
               <div className="flex flex-row justify-between mt-3 px-3 py-2 bg-body rounded-xl border">
                 <span className="vazir-bold">قیمت کل : </span>
                 <span>
-                  {(totalPriceCart - totalOffer).toLocaleString("fa-money")}{" "}
+                  {(totalPriceCart - totalOffer).toLocaleString("fa-money")}
                   تومان
                 </span>
               </div>
-              <div className="flex flex-row justify-center items-center mt-3 px-3 py-1 bg-blue text-white rounded-xl border">
+              <div onClick={()=>navigate("/Payment")} className="flex flex-row justify-center items-center mt-3 px-3 py-1 bg-blue text-white rounded-xl border">
                 <button>پرداخت</button>
               </div>
             </div>
@@ -167,7 +178,7 @@ export default function Cart() {
                     <div className="flex flex-col items-center md:items-start ">
                       <div className="flex flex-row">
                         <p className="text-[18px]">{item.name}</p>
-                        <span className=" bg-red-200  text-red-600 text-[14px] mr-2 px-2 pt-1.5 text-center rounded-xl">
+                        <span className=" max-h-[28px] bg-red-200  text-red-600 text-[14px] mr-2 px-2 pt-1.5 text-center rounded-xl">
                           {item.Discount}%
                         </span>
                       </div>
@@ -214,7 +225,7 @@ export default function Cart() {
                         {item.q.toLocaleString("fa")}
                       </span>
                       <button
-                        onClick={() => minQuantity(item)}
+                        onClick={() => minQuantity(item,item.q)}
                         className="w-[30px] h-[30px]  p-1.5 rounded-l-xl text-white bg-blue cursor-pointer "
                       >
                         {item.q <= 1 ? (

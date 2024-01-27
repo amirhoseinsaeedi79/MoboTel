@@ -14,6 +14,7 @@ export default function App() {
   const [allProduct, setAllProduct] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [offersProduct, setOffersProduct] = useState([]);
+  const [allCart, setAllCart] = useState([]);
   const [statusModal, setStatusModal] = useState(false);
   const [statusbestProduct, setStatusBestProduct] = useState(false);
   const [statusComment, setStatusComment] = useState(false);
@@ -28,32 +29,36 @@ export default function App() {
   const [showAddModalTicket, setShowAddModalTicket] = useState(false);
   const [allTicket, setAllTicket] = useState([]);
   const [showUsername, setShowUsername] = useState("ورود / ثبت نام");
+  const [numberNavbar, setNumberNavbar] = useState(0);
+  const [favorate, setFavorate] = useState([]);
   // ================================================================ All functions
   const { pathname: location } = useLocation();
   let router = useRoutes(Router);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (
-      window.location.pathname == "/Register" 
-    ) {
+    if (window.location.pathname == "/Register") {
       setStatusRoute(true);
     } else {
       setStatusRoute(false);
     }
   }, [location]);
 
-  async function getAll_users() {
-    const userInfo = JSON.parse(localStorage.getItem("User"));
-    await axios
-      .get(`http://localhost:3000/user?id=${userInfo.id}`)
-      .then((res) => setAllTicket(res.data[0].tickets.reverse()));
-  }
   useEffect(() => {
-    GetProduct().then((res) => setAllProduct(res.data));
-    GetUser().then((res) => setAllUsers(res.data));
-    getAll_users();
+    if (isLogin) {
+      const listFavorate = JSON.parse(localStorage.getItem("Favorate"));
+      setFavorate(listFavorate);
+    }
   }, []);
+
+
+
+  useEffect(() => {
+      GetProduct().then((res) => setAllProduct(res.data));
+      GetUser().then((res) => setAllUsers(res.data));
+      const dataAt_localStorage = JSON.parse(localStorage.getItem("Cart"));
+      setAllCart(dataAt_localStorage);
+  },[]);
 
   useEffect(() => {
     const resultOffers = allProduct.filter((item) => {
@@ -62,13 +67,24 @@ export default function App() {
     setOffersProduct(resultOffers);
   }, [allProduct]);
 
+  useEffect(() => {
+    if (allCart != null) {
+      let total_Number = 0;
+      for (let obj of allCart) {
+        total_Number += obj.q;
+      }
+      const resultOffer = total_Number;
+      setNumberNavbar(resultOffer);
+    }
+
+  },[allCart]);
+
   const newProduct = (ctg) => {
     setAllProduct(ctg);
   };
   const setShow_Username = (ctg) => {
     setShowUsername(ctg);
   };
-
   const showTicket_Modal = (ctg) => {
     setShowModalTicket(ctg);
   };
@@ -92,6 +108,12 @@ export default function App() {
   const ShowFormHandler = (ctg) => {
     setShowForm(ctg);
   };
+  const editnumberNavbar = (ctg) => {
+    setNumberNavbar(ctg);
+  };
+  const updateFavorate = (ctg) => {
+    setFavorate(ctg);
+  };
   const ShowPasswordHandler = (ctg) => {
     setShowPassword(ctg);
   };
@@ -112,10 +134,17 @@ export default function App() {
   const getAllUser = (status) => {
     setAllUsers(status);
   };
+  const changeNumber_Navbar = (status) => {
+    setNumberNavbar(status);
+  };
 
   async function login(newtoken) {
     localStorage.setItem("User", JSON.stringify(newtoken));
     setIsLogin(true);
+    const userInfo = JSON.parse(localStorage.getItem("User"));
+    axios
+      .get(`https://mobo-server.liara.run/user?username=${userInfo.username}`)
+      .then((res) => setAllTicket(res.data[0].tickets.reverse()));
   }
 
   function logout() {
@@ -137,8 +166,10 @@ export default function App() {
     <Context.Provider
       value={{
         allProduct,
+        allCart,
         allTicket,
         statusModal,
+        favorate,
         statusbestProduct,
         infoProduct,
         statusComment,
@@ -152,7 +183,9 @@ export default function App() {
         showModalTicket,
         showAddModalTicket,
         showUsername,
+        numberNavbar,
         newProduct,
+        changeNumber_Navbar,
         setShow_Username,
         AddTicket_Modal,
         getNew_AllTicket,
@@ -162,6 +195,8 @@ export default function App() {
         login,
         logout,
         ShowPasswordHandler,
+        updateFavorate,
+        editnumberNavbar,
         ShowFormHandler,
         showOffer,
         showModalMenu,

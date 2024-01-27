@@ -13,7 +13,7 @@ export default function Questions() {
       </div>
       <div className="border-[1px] mt-6 text-[15px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl ">
         <div className="mb-8">
-          <p className="text-[22px] text-blue mb-2">
+          <p className="text-[18px] md:text-[20px] text-blue mb-2">
             خریداران چگونه می توانند به سایت موبوتل برای خرید لوازم جانبی موبایل
             اعتماد کنند؟
           </p>
@@ -26,7 +26,7 @@ export default function Questions() {
           </p>
         </div>
         <div className="mb-5">
-          <p className="text-[22px] text-blue mb-2">
+          <p className="text-[18px] md:text-[20px] text-blue mb-2">
             آیا در مجموعه موبوتل به اصل بودن لوازم جانبی توجه می شود؟
           </p>
           <p>
@@ -43,7 +43,7 @@ export default function Questions() {
         </div>
         {/* ===========================================3 */}
         <div className="mb-8">
-          <p className="text-[22px] text-blue mb-2">
+          <p className="text-[18px] md:text-[20px] text-blue mb-2">
             آیا برای خرید لوازم جانبی موبایل به صورت عمده از همه برند ها در
             مجموعه موبوتل  موجود هست؟
           </p>
@@ -54,7 +54,7 @@ export default function Questions() {
         </div>
         {/* ==============================================4 */}
         <div className="mb-8">
-          <p className="text-[22px] text-blue mb-2">
+          <p className="text-[18px] md:text-[20px] text-blue mb-2">
             برای خرید از فروشگاه موبوتل باید حتماً عضویت داشته باشیم؟
           </p>
           <p>
@@ -68,7 +68,7 @@ export default function Questions() {
         </div>
         {/* ==============================================5 */}
         <div className="mb-8">
-          <p className="text-[22px] text-blue mb-2">
+          <p className="text-[18px] md:text-[20px] text-blue mb-2">
             برای عضویت در سایت باید چکار کنم ؟
           </p>
           <p>
@@ -78,7 +78,7 @@ export default function Questions() {
         </div>
         {/* ==============================================6 */}
         <div className="mb-8">
-          <p className="text-[22px] text-blue mb-2">
+          <p className="text-[18px] md:text-[20px] text-blue mb-2">
             نحوه و زمان ارسال کالا چگونه است؟{" "}
           </p>
           <p>
@@ -88,7 +88,7 @@ export default function Questions() {
         </div>
         {/* ==============================================5 */}
         <div className="mb-8">
-          <p className="text-[22px] text-blue mb-2">
+          <p className="text-[18px] md:text-[20px] text-blue mb-2">
             میزان هزینه ارسال کالا برای هر فاکتور چقدر است؟
           </p>
           <p>
@@ -100,7 +100,7 @@ export default function Questions() {
         </div>
         {/* ==============================================6 */}
         <div className="mb-2">
-          <p className="text-[22px] text-blue mb-2">
+          <p className="text-[18px] md:text-[20px] text-blue mb-2">
             چطوری میتونم با پشتیبانی ارتباط بگیرم ؟
           </p>
           <p>

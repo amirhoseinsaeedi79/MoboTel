@@ -3,7 +3,6 @@ import { MdOutlineReply } from "react-icons/md";
 import { BiLike } from "react-icons/bi";
 import { BiDislike } from "react-icons/bi";
 import { useState } from "react";
-import { FaArrowTurnUp } from "react-icons/fa6";
 export default function UserComment(prop) {
   const [like, setLike] = useState(0);
   console.log("item log is " + prop);

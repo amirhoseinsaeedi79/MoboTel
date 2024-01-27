@@ -1,7 +1,7 @@
 import ApiRequest from "../Configs/Config";
 
-export const PostComment= (NewComment,CommentId) =>{
-  return  ApiRequest.post(`/api/comment/add/${CommentId}`,NewComment)
+export const PostComment= (NewComment) =>{
+  return  ApiRequest.post(`/api/comment`,NewComment)
 }
 export const GetComment= () =>{
   return  ApiRequest.get('/api/comment/all')

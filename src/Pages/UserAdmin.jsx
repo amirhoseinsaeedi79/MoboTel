@@ -6,7 +6,7 @@ import { BsBasket2Fill } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
 import { RiQuestionLine } from "react-icons/ri";
 import { LuLogOut } from "react-icons/lu";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Context from "../Context/context";
 import { toast } from "react-toastify";
 
@@ -20,12 +20,9 @@ export default function UserAdmin() {
 
   const closeMenu = () => {
     setMenuUser(false);
-    context.showModalMenu(false);
   };
-
   const openMenu = () => {
     setMenuUser(true);
-    context.showModalMenu(true);
   };
 
   const navigate = useNavigate();

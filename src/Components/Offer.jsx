@@ -1,4 +1,5 @@
 import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
 import { CiShoppingBasket } from "react-icons/ci";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -10,8 +11,9 @@ import Context from "../Context/context";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import allOffers from "../Data/offer";
-import useAddToListFavorate from "../Components/useAddToFavorate.jsx";
 import useAddToCart from "./useAddToCar";
+import { toast } from "react-toastify";
+import useAddToFavorate from "./useAddToFavorate";
 
 export default function Offer() {
   const context = useContext(Context);
@@ -28,6 +30,16 @@ export default function Offer() {
     navigate("/ShowProduct");
   };
 
+  function statusFavorate(item) {
+
+    const isin = (items) => items.name == item;
+    
+    let status = context.favorate.some(isin);
+
+    return status;
+
+  }
+
   return (
     <>
       <Title title={title} />
@@ -40,7 +52,7 @@ export default function Offer() {
             navigation={true}
             loop={true}
             autoplay={{
-              delay: 2000,
+              delay: 1700,
               disableOnInteraction: false,
             }}
             breakpoints={{
@@ -70,18 +82,23 @@ export default function Offer() {
           >
             {allOffers.map((item) => (
               <SwiperSlide key={item.id} className="w-full  md:pr-0">
-                <div className="w-full md:w-[320px] rounded-xl text-center bg-white flex flex-col p-4 shadow-lg">
+                <div className="w-full md:w-[320px] rounded-xl text-center bg-white flex flex-col px-3 pt-3 pb-2 shadow-lg">
                   <div className="flex flex-row justify-between items-center">
                     <div className="text-[17px] px-2 py-[3px] pt-1 rounded-lg text-red-600 bg-red-200 ">
                       <span>40٪ تخفیف</span>
                     </div>
                     <div className="flex-row-center">
-                      <FaRegHeart
-                        onClick={() =>
-                          useAddToListFavorate(item, context.isLogin)
-                        }
-                        className="w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer text-red-500"
-                      />
+                      {statusFavorate(item.name) == true ? (
+                        <FaHeart
+                          onClick={() => useAddToFavorate(item, context.isLogin,context.updateFavorate)}
+                          className={`w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer text-red-500`}
+                        />
+                      ) : (
+                        <FaRegHeart
+                          onClick={() => useAddToFavorate(item, context.isLogin,context.updateFavorate)}
+                          className={`w-[35px] h-[35px] px-[7px] py-1 rounded-xl ml-2 bg-gray-200 cursor-pointer text-red-500`}
+                        />
+                      )}
                       <span
                         onClick={() => InfoHandler(item)}
                         className=" px-[7px] py-1 text-[18px] rounded-xl bg-gray-200 cursor-pointer hover:text-blue"
@@ -90,29 +107,37 @@ export default function Offer() {
                       </span>
                     </div>
                   </div>
-                  <div   onClick={() => InfoHandler(item)} className="flex-row-center cursor-pointer mt-3">
+                  <div
+                    onClick={() => InfoHandler(item)}
+                    className="flex-row-center cursor-pointer mt-3"
+                  >
                     <img
                       src={`images/${item.imgae}`}
                       alt=""
-                      className="w-[180px] h-[180px] md:w-[180px]  md:h-[180px] items-center"
+                      className="w-[140px] h-[140px] md:w-[180px]  md:h-[180px] items-center"
                     />
                   </div>
-                  <div   onClick={() => InfoHandler(item)} className="flex-row-center cursor-pointer mt-4 text-[18px]">
+                  <div
+                    onClick={() => InfoHandler(item)}
+                    className="flex-row-center cursor-pointer mt-4 text-[18px]"
+                  >
                     <span>{item.name}</span>
                   </div>
                   <div className="flex flex-row-reverse items-center justify-between mt-3 ">
                     <div className="py-2">
                       <button
-                        onClick={() => useAddToCart(item, context.isLogin)}
+                        onClick={() => useAddToCart(item, context)}
                         className="flex-row-center bg-blue rounded-xl p-2 mx-h-[50px] hover:text-white"
                       >
-                        <CiShoppingBasket className="w-[25px] h-[25px]" />
-                        <span>خرید محصول</span>
+                        <CiShoppingBasket className="w-[22px] h-[22px]" />
+                        <span>سفارش</span>
                       </button>
                     </div>
                     <div className="flex-col-center text-[17px]">
-                      <span>{item.price}</span>
-                      <del className="text-red-500">{item.oldPrice}</del>
+                      <span>{item.price.toLocaleString("fa-money")} تومان</span>
+                      <del className="text-red-500">
+                        {item.oldPrice.toLocaleString("fa-money")} تومان
+                      </del>
                     </div>
                   </div>
                 </div>

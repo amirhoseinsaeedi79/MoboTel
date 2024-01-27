@@ -1,11 +1,9 @@
-
-import { IoIosMore } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
-
+import { IoIosMore } from 'react-icons/io'
 export default function Title(prop) {
-  const navigate =useNavigate()
+  const navigate = useNavigate()
   return (
-    <div className="flex flex-row justify-between items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl my-2 mb-7 text-[12px] md:text-[16px] vazir-bold">
+    <div className="flex flex-row justify-between items-center border-[1px] border-gray-200 bg-white py-2 px-2 md:py-5 md:px-3 mx-2 md:mx-6 rounded-xl shadow-xl my-2 mb-7 text-[14px] md:text-[16px] vazir-bold">
     <div className="flex-row-center ">
       <img src="images/item.png" alt="" className='w-[20px] h-[20px] md:w-[32px] md:h-[32px]' />
       <span className="mr-3">

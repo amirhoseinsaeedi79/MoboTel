@@ -6,6 +6,12 @@ import { toast } from "react-toastify";
 import { useNavigate, useNavigation } from "react-router-dom";
 export default function EditProfile() {
   const [showUsername, setShowUsername] = useState("");
+  const [showUser, setShowUser] = useState("");
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("User"));
+    setShowUser(user);
+  }, []);
 
   const context = useContext(Context);
   const navigate = useNavigate();
@@ -35,6 +41,7 @@ export default function EditProfile() {
 
     await PatchUser(editUser, showUsername.id).then((res) => console.log(res));
     reset();
+    navigate("/UserAdmin/Profile");
     toast.success("اطلاعات با موفقیت ویرایش شد", {
       position: "top-center",
       autoClose: 1200,
@@ -46,7 +53,7 @@ export default function EditProfile() {
       theme: "colored",
     });
     context.login(editUser);
-    context.setShow_Username(editUser.username)
+    context.setShow_Username(editUser.username);
   }
 
   return (
@@ -54,12 +61,15 @@ export default function EditProfile() {
       <div className="w-full flex flex-col text-[16px] md:text-[18px]  vazir-bold">
         <h4>ویرایش اطلاعات کاربری</h4>
         <div className="bg-gray-200 mt-4">
-          <div className="w-[14%] h-[3px] bg-blue "></div>
+          <div className="w-[60%] md:w-[20%] h-[3px] bg-blue "></div>
         </div>
       </div>
       <form onSubmit={handleSubmit(registerHandler)} className="w-full lg:mt-3">
         <div className="flex flex-col md:flex-row items-center ">
           <div className=" w-full md:w-1/2 mt-5 flex flex-col justify-center ">
+            <label htmlFor="#name" className="vazir-bold mb-1.5 mr-2 ">
+              نام کامل :
+            </label>
             <input
               {...register("name", {
                 required: "وارد کردن نام اجباریست",
@@ -70,13 +80,20 @@ export default function EditProfile() {
               })}
               type="text"
               className=" md:ml-3 px-5 py-3 lg:py-4  focus:outline-blue border-[2px] border-gray-200 rounded-xl shadow-lg  "
-              placeholder="نام کامل خودرا وارد کنید"
+              placeholder={
+                showUser.fullname !== undefined
+                  ? showUser.fullname
+                  : "نام کاربری خود را وارد کنید"
+              }
             />
             <div className="error text-center">
               {errors.name && errors.name.message}
             </div>
           </div>
           <div className=" w-full md:w-1/2 mt-5 flex flex-col justify-center ">
+            <label htmlFor="#name" className="vazir-bold mb-1.5 mr-4 ">
+              نام کاربری :
+            </label>
             <input
               {...register("username", {
                 minLength: {
@@ -86,7 +103,7 @@ export default function EditProfile() {
               })}
               type="text"
               className=" md:mr-3 px-5 py-3 lg:py-4  focus:outline-blue border-[2px] border-gray-200 rounded-xl shadow-lg  "
-              placeholder="نام کاربری خود را وارد کنید"
+              placeholder={showUser.username}
             />
             <div className="error  text-center">
               {errors.username && errors.username.message}
@@ -95,24 +112,34 @@ export default function EditProfile() {
         </div>
         <div className="flex flex-col md:flex-row items-center lg:mt-1">
           <div className=" w-full lg::w-1/2 mt-5 flex flex-col justify-center ">
+            <label htmlFor="#name" className="vazir-bold mb-1.5 mr-2 ">
+              ایمیل :
+            </label>
             <input
               {...register("email", {})}
               type="email"
               className=" md:ml-3 px-5 py-3 lg:py-4  focus:outline-blue border-[2px] border-gray-200 rounded-xl shadow-lg  "
-              placeholder="ایمیل خودرا وارد کنید"
+              placeholder={showUser.email}
             />
             <div className="error text-center">
               {errors.email && errors.email.message}
             </div>
           </div>
           <div className="w-full ld:w-1/2 mt-5 flex flex-col justify-center ">
+            <label htmlFor="#name" className="vazir-bold mb-1.5 mr-4 ">
+              آدرس :
+            </label>
             <input
               {...register("address", {
                 required: "وارد کردن آدرس اجباریست",
               })}
               type="text"
               className=" md:mr-3 px-5 py-3 lg:py-4  focus:outline-blue border-[2px] border-gray-200 rounded-xl shadow-lg  "
-              placeholder="آدرس خود را وارد کنید"
+              placeholder={
+                showUser.address !== undefined
+                  ? showUser.address
+                  : "نام کاربری خود را وارد کنید"
+              }
             />
             <div className="error text-center">
               {errors.address && errors.address.message}
@@ -121,6 +148,9 @@ export default function EditProfile() {
         </div>
         <div className="flex flex-col md:flex-row items-center lg:mt-1">
           <div className="w w-full md:w-1/2 mt-5 flex flex-col justify-center ">
+            <label htmlFor="#name" className="vazir-bold mb-1.5 mr-2 ">
+              رمز عبور :
+            </label>
             <input
               type="password"
               {...register("password", {
@@ -130,13 +160,16 @@ export default function EditProfile() {
                 },
               })}
               className=" md:ml-3 px-5 py-3 lg:py-4  focus:outline-blue border-[2px] border-gray-200 rounded-xl shadow-lg  "
-              placeholder="رمزعبور خودرا وارد کنید"
+              placeholder={showUser.password}
             />
             <div className="error text-center">
               {errors.password && errors.password.message}
             </div>
           </div>
           <div className="w-full md:w-1/2 mt-5 flex flex-col justify-center ">
+            <label htmlFor="#name" className="vazir-bold mb-1.5 mr-4 ">
+              شماره تماس :
+            </label>
             <input
               type="text"
               {...register("phone", {
@@ -150,7 +183,7 @@ export default function EditProfile() {
                 },
               })}
               className=" md:mr-3 px-5 py-3 lg:py-4   focus:outline-blue border-[2px] border-gray-200 rounded-xl shadow-lg  "
-              placeholder="شماره تماس خود را وارد کنید"
+              placeholder={showUser.phone}
             />
             <div className="error text-center">
               {errors.phone && errors.phone.message}
