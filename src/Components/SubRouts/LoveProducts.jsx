@@ -7,12 +7,11 @@ export default function LoveProducts() {
 
   useEffect(() => {
     const dataAt_localStorage = JSON.parse(localStorage.getItem("Favorate"));
-    if (dataAt_localStorage!=null) {
+    if (dataAt_localStorage != null) {
       dataAt_localStorage.reverse();
       setFavorate(dataAt_localStorage);
     }
-
-  },[]);
+  }, []);
 
   const removeItem = (item) => {
     const dataAt_localStorage = JSON.parse(localStorage.getItem("Favorate"));
@@ -88,7 +87,7 @@ export default function LoveProducts() {
                       <tr key={order.id} className="bg-gray-100 vazir-bold ">
                         <td className="text-[15px] text-gray-900  px-6 py-4 whitespace-nowrap">
                           <img
-                            src={`/public/images/${order.imgae}`}
+                            src={`/images/${order.imgae}`}
                             alt=""
                             className="w-[100px] h-[75px] rounded-xl"
                           />
@@ -126,8 +125,6 @@ export default function LoveProducts() {
           </span>
         </div>
       )}
-
-      {/* =============================================================== Table Love Products // finish */}
     </div>
   );
 }
