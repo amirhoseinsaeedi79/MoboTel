@@ -28,7 +28,7 @@ export default function ModalComment() {
       text: data.text,
     };
     axios
-      .post("https://mobo-server.liara.run/comment", addComment)
+      .post("https://mobodb.onrender.com/comment", addComment)
       .then((res) => console.log(res));
     reset();
     context.showModalComment(false);

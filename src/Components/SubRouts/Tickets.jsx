@@ -20,7 +20,7 @@ export default function Tickets() {
     context.getAllUser(allUsers);
     console.log("tickets:"+context.allTicket);
     const userInfo = JSON.parse(localStorage.getItem("User"));
-    axios.get(`https://mobo-server.liara.run/user?username=${userInfo.username}`).then(res => context.getNew_AllTicket(res.data[0].tickets.reverse()
+    axios.get(`https://mobodb.onrender.com/user?username=${userInfo.username}`).then(res => context.getNew_AllTicket(res.data[0].tickets.reverse()
     ))
   },[]);
 

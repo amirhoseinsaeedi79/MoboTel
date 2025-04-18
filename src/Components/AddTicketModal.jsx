@@ -22,7 +22,7 @@ export default function AddTicketModal() {
     const userInfo = JSON.parse(localStorage.getItem("User"));
     setInfoUser(userInfo.username);
     await axios
-      .get(`https://mobo-server.liara.run/user?id=${userInfo.id}`)
+      .get(`https://mobodb.onrender.com/user?id=${userInfo.id}`)
       .then((res) => setAllUsers(res.data[0]));
   }
 
@@ -44,7 +44,7 @@ export default function AddTicketModal() {
     };
 
     axios
-      .post("https://mobo-server.liara.run/ticket", dataTicket)
+      .post("https://mobodb.onrender.com/ticket", dataTicket)
       .then((res) => console.log(res.data));
 
     await oldTiket.push(dataTicket);

@@ -61,11 +61,12 @@ export default function Navbar() {
     }
     const resultOffer = total_Number;
     setNumberCart(resultOffer);
-  },[allCart]);
+  }, [allCart]);
 
   const exitMenu = () => {
     setStatusMenu(!statusMenu);
     context.showModalMenu(false);
+    context.newProduct([]);
   };
   const openMenu = () => {
     setStatusMenu(!statusMenu);
@@ -86,7 +87,6 @@ export default function Navbar() {
                 alt="logo"
                 className="w-[90px] h-[40px]  md:w-[140px] md:h-[55px] lg:hidden"
               />
-               
             </Link>
             <div className="relative  mr-5 lg:mr-0 hidden lg:flex">
               <button className="flex absolute inset-y-0 left-2 items-center pl-3 ">
@@ -115,17 +115,37 @@ export default function Navbar() {
               ref={userButtom}
               className="flex-row-center p-2 md:p-[10px] ml-3 cursor-pointer bg-white border-[2px] hover:border-blue  rounded-3xl shadow-md  border-gray-200"
             >
-              <FaCircleUser className={`w-[22px] h-[22px] md:w-[28px] md:h-[28px] ${context.isLogin ? ("text-green-500") : ("text-blue")}`} />
+              <FaCircleUser
+                className={`w-[22px] h-[22px] md:w-[28px] md:h-[28px] ${
+                  context.isLogin ? "text-green-500" : "text-blue"
+                }`}
+              />
               <div className="mr-2 hidden  lg:flex">{context.showUsername}</div>
             </div>
             <Link
               to="/Cart"
-              className={`flex-row-center items-center p-2  md:p-[10px] cursor-pointer bg-gray-300 lg:bg-white   hover:border-blue rounded-3xl shadow-md border-[2px] ${context.numberNavbar >=1 && context.isLogin ? ("border-green-500") : ("border-gray-300")}`}
+              className={`flex-row-center items-center p-2  md:p-[10px] cursor-pointer bg-gray-300 lg:bg-white   hover:border-blue rounded-3xl shadow-md border-[2px] ${
+                context.numberNavbar >= 1 && context.isLogin
+                  ? "border-green-500"
+                  : "border-gray-300"
+              }`}
             >
-              <FaBasketShopping className={`w-[22px] h-[22px] md:w-[30px] md:h-[30px] ml-2 ${context.numberNavbar >=1 && context.isLogin ? ("text-green-500") : ("text-blue")}`} />
+              <FaBasketShopping
+                className={`w-[22px] h-[22px] md:w-[30px] md:h-[30px] ml-2 ${
+                  context.numberNavbar >= 1 && context.isLogin
+                    ? "text-green-500"
+                    : "text-blue"
+                }`}
+              />
               <span className="mx-3 hidden lg:flex">سبد خرید</span>
-              <span className={`px-2  lg:px-2  text-[16px]  lg:text-[16px] pt-[2px] rounded-full ${context.numberNavbar >=1 && context.isLogin ? ("bg-green-500") : ("bg-blue")}  shadow-xl `}>
-                {context.isLogin==true?(context.numberNavbar):0}
+              <span
+                className={`px-2  lg:px-2  text-[16px]  lg:text-[16px] pt-[2px] rounded-full ${
+                  context.numberNavbar >= 1 && context.isLogin
+                    ? "bg-green-500"
+                    : "bg-blue"
+                }  shadow-xl `}
+              >
+                {context.isLogin == true ? context.numberNavbar : 0}
               </span>
             </Link>
           </div>

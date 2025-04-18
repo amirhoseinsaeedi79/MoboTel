@@ -27,10 +27,19 @@ export default function Products() {
   // ============================================================ functions
   useEffect(() => {
     GetProduct().then((res) => setAllProducts(res.data));
-  }, [search]);
+  }, [setSearch]);
+
+  console.log(context.allProduct.length);
+
   useEffect(() => {
-    GetProduct().then((res) =>context.newProduct(res.data));
-  },[]);
+    if (context.allProduct.length == 0) {
+      GetProduct().then((res) => context.newProduct(res.data));
+    }
+
+    return () => {
+      context.newProduct([]);
+    };
+  }, []);
 
   const InfoHandler = async (item) => {
     const localInfo = localStorage.setItem("info", JSON.stringify(item));
@@ -40,7 +49,7 @@ export default function Products() {
 
   async function sortHandler(ctg) {
     await axios
-      .get(`https://mobo-server.liara.run/product?ctg=${ctg}`)
+      .get(`https://mobodb.onrender.com/product?ctg=${ctg}`)
       .then((res) => context.newProduct(res.data));
     console.log(context.allProduct);
   }
@@ -82,6 +91,8 @@ export default function Products() {
     textWhite: "محصولات",
     textBlue: "فروشگاه",
   };
+
+  console.log("product page: ", context.allProduct);
 
   return (
     <div className="w-full pt-[95px] md:pt-28 lg:pt-6 pb-2">
@@ -252,7 +263,7 @@ export default function Products() {
           )}
         </div>
         {/* ================================================================ sort products */}
-        <div className="w-full md:w-[23%] xl:w-[25%] mb-7 md:mb-0 md:h-[560px] bg-white ml-5 flex justify-center flex-row md:flex-col rounded-xl py-2 md:pt-4 md:sticky md:top-[90px] shadow-xl">
+        <div className="w-full md:w-[23%] xl:w-[25%] mb-7 md:mb-0 h-fit bg-white ml-5 flex justify-center flex-row md:flex-col rounded-xl py-2 md:pt-4 md:sticky md:top-[90px] shadow-xl">
           <form onSubmit={() => event.preventDefault()} className=" ">
             <div className="w-full relative px-3">
               <button className="flex absolute inset-y-0 left-2 items-center pl-3 ">
@@ -276,7 +287,7 @@ export default function Products() {
               />
             </div>
           </form>
-          <div className="px-3 pt-3 vazir-bold hidden md:flex md:flex-col pb-2">
+          {/* <div className="px-3 pt-3 vazir-bold hidden md:flex md:flex-col pb-2">
             <span className="text-blue">دسته بندی :</span>
             <div>
               <div className="mt-3 flex flex-row">
@@ -344,8 +355,8 @@ export default function Products() {
                 />
               </div>
             </div>
-          </div>
-          <div className="px-3 vazir-bold hidden md:flex flex-row md:flex-col ">
+          </div> */}
+          <div className="p-3 vazir-bold hidden md:flex flex-row md:flex-col ">
             <span className="text-blue">نمایش بر اساس :</span>
             <div>
               <div className="mt-3 flex flex-row">

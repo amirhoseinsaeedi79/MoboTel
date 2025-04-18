@@ -27,7 +27,7 @@ export default function Offers() {
 
   async function sortHandler(ctg) {
     await axios
-      .get(`https://mobo-server.liara.run/product?ctg=${ctg}`)
+      .get(`https://mobodb.onrender.com/product?ctg=${ctg}`)
       .then((res) => context.newProduct(res.data));
     console.log(context.allProduct);
   }
@@ -159,7 +159,7 @@ export default function Offers() {
           )}
         </div>
         {/* ================================================================ sort products */}
-        <div className="w-full md:w-[23%] xl:w-[25%] mb-7 md:mb-0 md:h-[490px] bg-white ml-5 flex md:justify-center flex-row md:flex-col rounded-xl  md:sticky md:top-[90px] shadow-xl">
+        <div className="w-full md:w-[23%] xl:w-[25%] mb-7 md:mb-0 h-fit bg-white ml-5 flex md:justify-center flex-row md:flex-col rounded-xl  md:sticky md:top-[90px] shadow-xl">
           <div className="px-3 pt-3 vazir-bold hidden md:flex md:flex-col ">
             <span className="text-blue">دسته بندی :</span>
             <div>

@@ -23,7 +23,7 @@ export default function Catgory() {
   };
   async function sortHandler(ctg) {
     await axios
-      .get(`https://mobo-server.liara.run/product?ctg=${ctg}`)
+      .get(`https://mobodb.onrender.com/product?ctg=${ctg}`)
       .then((res) => context.newProduct(res.data));
 
     navigate("/Products");

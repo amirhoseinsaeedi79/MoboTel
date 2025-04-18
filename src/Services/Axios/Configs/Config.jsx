@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const ApiRequest = axios.create({
-  baseURL: "https://mobo-server.liara.run/",
+  baseURL: "https://mobodb.onrender.com/",
   headers: {
     "Content-Type": "application/json",
   },

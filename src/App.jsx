@@ -51,14 +51,12 @@ export default function App() {
     }
   }, []);
 
-
-
   useEffect(() => {
-      GetProduct().then((res) => setAllProduct(res.data));
-      GetUser().then((res) => setAllUsers(res.data));
-      const dataAt_localStorage = JSON.parse(localStorage.getItem("Cart"));
-      setAllCart(dataAt_localStorage);
-  },[]);
+    // GetProduct().then((res) => setAllProduct(res.data));
+    GetUser().then((res) => setAllUsers(res.data));
+    const dataAt_localStorage = JSON.parse(localStorage.getItem("Cart"));
+    setAllCart(dataAt_localStorage);
+  }, []);
 
   useEffect(() => {
     const resultOffers = allProduct.filter((item) => {
@@ -76,8 +74,7 @@ export default function App() {
       const resultOffer = total_Number;
       setNumberNavbar(resultOffer);
     }
-
-  },[allCart]);
+  }, [allCart]);
 
   const newProduct = (ctg) => {
     setAllProduct(ctg);
@@ -143,7 +140,7 @@ export default function App() {
     setIsLogin(true);
     const userInfo = JSON.parse(localStorage.getItem("User"));
     axios
-      .get(`https://mobo-server.liara.run/user?username=${userInfo.username}`)
+      .get(`https://mobodb.onrender.com/user?username=${userInfo.username}`)
       .then((res) => setAllTicket(res.data[0].tickets.reverse()));
   }
 
@@ -160,7 +157,10 @@ export default function App() {
       setIsLogin(false);
     }
   }, []);
+
   console.log("isloggin:", isLogin);
+
+  console.log("home page: ", allProduct.length);
 
   return (
     <Context.Provider
