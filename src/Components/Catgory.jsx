@@ -38,10 +38,10 @@ export default function Catgory() {
             slidesPerView={4}
             centeredSlides={true}
             loop={true}
-            autoplay={{
-              delay: 1800,
-              disableOnInteraction: false,
-            }}
+            // autoplay={{
+            //   delay: 1800,
+            //   disableOnInteraction: false,
+            // }}
             breakpoints={{
               320: {
                 slidesPerView: 1,
